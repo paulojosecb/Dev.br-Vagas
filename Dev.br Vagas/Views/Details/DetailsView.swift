@@ -64,7 +64,7 @@ class DetailsView: UIView {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         
-        self.favoriteUseCase?.isSaved(number: self.issue.number!, completion: { (result) in
+        self.favoriteUseCase?.isSaved(issue: self.issue, completion: { (result) in
             switch result {
             case let .saved(s):
                 button.setTitle(s ? "Remover" : "Salvar", for: .normal)
@@ -155,7 +155,7 @@ class DetailsView: UIView {
     
     @objc func handleSaveButton(_ sender: UITapGestureRecognizer? = nil) {
         guard let number = issue.number, let useCase = favoriteUseCase else { return }
-        useCase.toggleFavorite(with: number) { (result) in
+        useCase.toggleFavorite(issue: self.issue) { (result) in
             switch result {
             case .added:
                 saveButton.setTitle("Remover", for: .normal)

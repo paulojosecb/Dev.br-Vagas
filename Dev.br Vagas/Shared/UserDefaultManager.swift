@@ -10,25 +10,70 @@ import Foundation
 
 class UserDefaultManager: FavoriteGateway {
     
-    func isSaved(number: Int, completion: (FavoriteUseCaseResult<Bool>) -> Void) {
-        let saved = UserDefaults.standard.object(forKey: "SavedItems") as? [Int] ?? [Int]()
-        completion(.saved(saved.contains(number)))
+    func fetchFavorites(completion: (FavoriteUseCaseResult<Bool, Issue>) -> Void) {
+        
+        do {
+            let issues = try getIssues()
+            completion(.fetched(issues))
+        } catch let error {
+            completion(.failure(error))
+        }
+        
     }
     
-    func toggleFavorite(with number: Int, completion: (FavoriteUseCaseResult<Bool>) -> Void) {
-        var saved = UserDefaults.standard.object(forKey: "SavedItems") as? [Int] ?? [Int]()
-        
-        if (saved.contains(number)) {
-            let filterdSaved = saved.filter { (element) -> Bool in
-                element != number
+    func isSaved(issue: Issue, completion: (FavoriteUseCaseResult<Bool, Issue>) -> Void) {
+        do {
+            let issues = try getIssues()
+            
+            let saved = issues.first { (i) -> Bool in
+                i == issue
             }
             
-            UserDefaults.standard.setValue(filterdSaved, forKeyPath: "SavedItems")
-            completion(.removed)
-        } else {
-            saved.append(number)
-            UserDefaults.standard.setValue(saved, forKeyPath: "SavedItems")
-            completion(.added)
+            completion(.saved(saved != nil ? true : false))
+        } catch let error {
+            completion(.failure(error))
         }
     }
+    
+    func toggleFavorite(issue: Issue, completion: (FavoriteUseCaseResult<Bool, Issue>) -> Void) {
+        
+        do {
+            var issues = try getIssues()
+            
+            if (issues.contains(issue)) {
+                let filteredIssues = issues.filter { (i) -> Bool in
+                    i != issue
+                }
+                
+                try save(filteredIssues)
+                completion(.removed)
+            } else {
+                issues.append(issue)
+                
+                try save(issues)
+                completion(.added)
+            }
+            
+        } catch let error {
+            completion(.failure(error))
+        }
+    
+    }
+    
+    private func getIssues() throws -> [Issue] {
+        guard let savedIssuesData = UserDefaults.standard.object(forKey: "SavedItems") as? Data else {
+            return [Issue]()
+        }
+        
+        guard let savedIssues = try? JSONDecoder().decode([Issue].self, from: savedIssuesData) else {
+            throw CustomError(description: "Error decoding issue data")
+        }
+        return savedIssues
+    }
+    
+    private func save(_ issues: [Issue]) throws {
+        let enconded = try JSONEncoder().encode(issues)
+        UserDefaults.standard.set(enconded, forKey: "SavedItems")
+    }
+
 }

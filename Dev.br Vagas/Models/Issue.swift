@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Issue: NSObject, Codable {
+struct Issue: Codable, Equatable {
     
     var title: String?
     var body: String?
@@ -18,12 +18,7 @@ class Issue: NSObject, Codable {
     var html_url: String?
     var created_at: String?
     
-    init(title: String, body: String, state: String, number: Int) {
-        self.title = title
-        self.body = body
-        self.state = state
-        self.number = number
-        super.init()
+    static func ==(lhs: Issue, rhs: Issue) -> Bool {
+        return lhs.number == rhs.number
     }
-
 }

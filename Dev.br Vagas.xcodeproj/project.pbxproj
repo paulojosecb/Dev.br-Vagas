@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		091699E8E7BFA2642CE2E239 /* Pods_Dev_br_VagasTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 260D3B643979ECDEF1365B83 /* Pods_Dev_br_VagasTests.framework */; };
 		2B0F7B78235E3E6E00D6C119 /* UserDefaultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0F7B77235E3E6E00D6C119 /* UserDefaultManager.swift */; };
-		2B0F7B7C235E3ED300D6C119 /* Favorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0F7B7B235E3ED300D6C119 /* Favorite.swift */; };
 		2B0F7B7E235E3F4700D6C119 /* FavoriteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0F7B7D235E3F4700D6C119 /* FavoriteUseCase.swift */; };
 		2B0F7B80235E3F6B00D6C119 /* FavoriteGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0F7B7F235E3F6B00D6C119 /* FavoriteGateway.swift */; };
 		2BB44AD3235E15F500DDA0DE /* UserImageGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB44ABB235E15F500DDA0DE /* UserImageGateway.swift */; };
@@ -52,7 +51,6 @@
 /* Begin PBXFileReference section */
 		260D3B643979ECDEF1365B83 /* Pods_Dev_br_VagasTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Dev_br_VagasTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B0F7B77235E3E6E00D6C119 /* UserDefaultManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultManager.swift; sourceTree = "<group>"; };
-		2B0F7B7B235E3ED300D6C119 /* Favorite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favorite.swift; sourceTree = "<group>"; };
 		2B0F7B7D235E3F4700D6C119 /* FavoriteUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteUseCase.swift; sourceTree = "<group>"; };
 		2B0F7B7F235E3F6B00D6C119 /* FavoriteGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteGateway.swift; sourceTree = "<group>"; };
 		2BB44ABB235E15F500DDA0DE /* UserImageGateway.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserImageGateway.swift; sourceTree = "<group>"; };
@@ -212,7 +210,6 @@
 			children = (
 				2BB44AE5235E160200DDA0DE /* User.swift */,
 				2BB44AE6235E160200DDA0DE /* Issue.swift */,
-				2B0F7B7B235E3ED300D6C119 /* Favorite.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -461,7 +458,6 @@
 				2BB44ADE235E15F500DDA0DE /* CardView.swift in Sources */,
 				2BB44AD4235E15F500DDA0DE /* UserImageUseCase.swift in Sources */,
 				2BB44ADB235E15F500DDA0DE /* DetailsView.swift in Sources */,
-				2B0F7B7C235E3ED300D6C119 /* Favorite.swift in Sources */,
 				2BB44AD3235E15F500DDA0DE /* UserImageGateway.swift in Sources */,
 				2BB44AD6235E15F500DDA0DE /* IssueGateway.swift in Sources */,
 				2BB44ADA235E15F500DDA0DE /* HomeViewController.swift in Sources */,

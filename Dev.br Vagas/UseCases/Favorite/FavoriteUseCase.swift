@@ -8,11 +8,12 @@
 
 import Foundation
 
-enum FavoriteUseCaseResult<Bool> {
+enum FavoriteUseCaseResult<Bool, Issue> {
     case added
     case removed
     case saved(Bool)
-    case Failuer(Error?)
+    case fetched([Issue])
+    case failure(Error?)
 }
 
 class FavoriteUseCase {
@@ -24,11 +25,11 @@ class FavoriteUseCase {
         self.gateway = gateway
     }
     
-    func toggleFavorite(with number: Int, completion: (FavoriteUseCaseResult<Bool>) -> Void) {
-        gateway.toggleFavorite(with: number, completion: completion)
+    func toggleFavorite(issue: Issue, completion: (FavoriteUseCaseResult<Bool, Issue>) -> Void) {
+        gateway.toggleFavorite(issue: issue, completion: completion)
     }
     
-    func isSaved(number: Int, completion: (FavoriteUseCaseResult<Bool>) -> Void) {
-        gateway.isSaved(number: number, completion: completion)
+    func isSaved(issue: Issue, completion: (FavoriteUseCaseResult<Bool, Issue>) -> Void) {
+        gateway.isSaved(issue: issue, completion: completion)
     }
 }

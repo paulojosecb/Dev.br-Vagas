@@ -9,6 +9,7 @@
 import Foundation
 
 protocol FavoriteGateway {
-    func toggleFavorite(with number: Int, completion: (FavoriteUseCaseResult<Bool>) -> Void)
-    func isSaved(number: Int, completion: (FavoriteUseCaseResult<Bool>) -> Void)
+    func toggleFavorite(issue: Issue, completion: (FavoriteUseCaseResult<Bool, Issue>) -> Void)
+    func isSaved(issue: Issue, completion: (FavoriteUseCaseResult<Bool, Issue>) -> Void)
+    func fetchFavorites(completion: (FavoriteUseCaseResult<Bool, Issue>) -> Void)
 }
