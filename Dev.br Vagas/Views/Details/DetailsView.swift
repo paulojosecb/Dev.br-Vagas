@@ -13,6 +13,8 @@ class DetailsView: UIView {
     
     let issue: Issue
     
+    var onSave: (() -> Void)?
+    
     var favoriteUseCase: FavoriteUseCase?
     
     var bodyViewHeight: CGFloat = 0
@@ -53,10 +55,6 @@ class DetailsView: UIView {
     lazy var bodyView: DownView? = {
         let label = try? DownView(frame: .zero, markdownString: "")
         label?.translatesAutoresizingMaskIntoConstraints = false
-//        label.font = .preferredFont(forTextStyle: .body)
-//        label.text = "Body da issue"
-//        label.numberOfLines = 0
-//        label.textAlignment = .left
         return (label ?? nil)
     }()
     
@@ -164,6 +162,12 @@ class DetailsView: UIView {
             default:
                 print()
             }
+            
+            guard let onSave = onSave else {
+                return
+            }
+            
+            onSave()
         }
     }
     

@@ -22,7 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
         
-        let navigationController = UINavigationController(rootViewController: HomeViewController())
+        let navigationController = UINavigationController(rootViewController: HomeViewController(mode: .all))
         navigationController.navigationBar.prefersLargeTitles = true
         
         navigationController.navigationBar.isTranslucent = true

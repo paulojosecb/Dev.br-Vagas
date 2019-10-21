@@ -14,6 +14,8 @@ class DetailsViewControlller: UIViewController {
     
     var userImageUseCase: UserImageUseCase?
     
+    var onSave: (() -> Void)?
+    
     var contentView: DetailsView?
     
     init(issue: Issue) {
@@ -29,6 +31,7 @@ class DetailsViewControlller: UIViewController {
         super.viewDidLoad()
         
         contentView = DetailsView(frame: .zero, issue: issue)
+        contentView?.onSave = self.onSave
         self.view = contentView
         
         self.userImageUseCase = UserImageUseCase(gateway: ApiManager(), presenter: self)

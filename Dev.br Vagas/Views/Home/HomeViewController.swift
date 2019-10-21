@@ -9,11 +9,17 @@
 import UIKit
 import Alamofire
 
+enum HomeMode {
+    case all
+    case favorites
+}
+
 class HomeViewController: UIViewController {
     
     var contentView: HomeView?
     
     var issueUseCase: IssueUseCase?
+    let mode: HomeMode
     
     var issues: [Issue] = [] {
         didSet {
@@ -22,18 +28,31 @@ class HomeViewController: UIViewController {
         }
     }
     
+    init(mode: HomeMode) {
+        self.mode = mode
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "Issues"
-        
+        self.title = mode == .all ? "Todas vagas" : "Favoritas"
+                
+        if (mode == .all) {
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Favoritos", style: .plain, target: self, action: #selector(presentFavorites))
+        }
+
         self.contentView = HomeView(frame: self.view.bounds, parentVC: self)
         self.view = contentView
         
-        issueUseCase = IssueUseCase(gateway: ApiManager(), presenter: self)
-        issueUseCase?.fetchAllIssues()
+        issueUseCase = IssueUseCase(gateway: mode == .all ? ApiManager() : UserDefaultManager(), presenter: self)
+        issueUseCase?.fetchIssues()
     }
-    
+        
     func presentErrorAlert() {
         let alertController = UIAlertController(title: "Ocorreu um erro",
                                                 message: "Houve um erro enquanto processávamos sua requisição",
@@ -44,6 +63,11 @@ class HomeViewController: UIViewController {
 
         alertController.addAction(action)
         present(alertController, animated: true, completion: nil)
+    }
+    
+    @objc func presentFavorites() {
+        let vc = HomeViewController(mode: .favorites)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 
 }
@@ -86,6 +110,9 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = DetailsViewControlller(issue: issues[indexPath.row])
+        if (mode == .favorites) {
+            vc.onSave = issueUseCase?.fetchIssues
+        }
         self.navigationController?.present(vc, animated: true, completion: nil)
     }
 }

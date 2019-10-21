@@ -8,8 +8,17 @@
 
 import Foundation
 
-class UserDefaultManager: FavoriteGateway {
+class UserDefaultManager: FavoriteGateway, IssueGateway {
     
+    func fetchIssues(completion: @escaping (IssueUseCaseResult<[Issue]>) -> Void) {
+        do {
+            let issues = try getIssues()
+            completion(.sucess(issues))
+        } catch let error {
+            completion(.failure(error))
+        }
+    }
+        
     func fetchFavorites(completion: (FavoriteUseCaseResult<Bool, Issue>) -> Void) {
         
         do {

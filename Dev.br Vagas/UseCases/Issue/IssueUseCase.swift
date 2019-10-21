@@ -22,12 +22,8 @@ class IssueUseCase {
         self.presenter = presenter
     }
     
-    func fetchAllIssues() {
-        gateway.fetchAllIssues(completion: presenter.presentResponse(result:))
-    }
-    
-    func fetchIssue(with id: Int) {
-        gateway.fetchIssue(with: id, completion: presenter.presentResponse(result:))
+    func fetchIssues() {
+        gateway.fetchIssues(completion: presenter.presentResponse(result:))
     }
     
 }
