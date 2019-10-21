@@ -13,6 +13,8 @@ class DetailsView: UIView {
     
     let issue: Issue
     
+    var favoriteUseCase: FavoriteUseCase?
+    
     var bodyViewHeight: CGFloat = 0
     var bodyViewWidth: CGFloat = 0
     
@@ -61,8 +63,16 @@ class DetailsView: UIView {
     lazy var saveButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        let saved = UserDefaults.standard.object(forKey: "SavedItems") as? [Int] ?? [Int]()
-        button.setTitle(saved.contains(self.issue.number ?? 0) ? "Remover" : "Salvar", for: .normal)
+        
+        self.favoriteUseCase?.isSaved(number: self.issue.number!, completion: { (result) in
+            switch result {
+            case let .saved(s):
+                button.setTitle(s ? "Remover" : "Salvar", for: .normal)
+            default:
+                button.setTitle("Salvar", for: .normal)
+            }
+        })
+        
         button.setTitleColor(.systemBlue, for: .normal)
         button.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleSaveButton(_:))))
         return button
@@ -98,6 +108,8 @@ class DetailsView: UIView {
         self.issue = issue
         super.init(frame: frame)
         self.backgroundColor = .white
+        
+        self.favoriteUseCase = FavoriteUseCase(gateway: UserDefaultManager())
         
         titleLabel.text = issue.title
         stateLabel.text = issue.state
@@ -142,27 +154,16 @@ class DetailsView: UIView {
     }
     
     @objc func handleSaveButton(_ sender: UITapGestureRecognizer? = nil) {
-        guard let number = issue.number else { return }
-        let saved = toggleIssue(with: number)
-        saveButton.setTitle(saved ? "Remover" : "Salvar", for: .normal)
-    }
-    
-    func toggleIssue(with number: Int) -> Bool {
-        var saved = UserDefaults.standard.object(forKey: "SavedItems") as? [Int] ?? [Int]()
-        
-        if (saved.contains(number)) {
-            let filterdSaved = saved.filter { (element) -> Bool in
-                element != number
+        guard let number = issue.number, let useCase = favoriteUseCase else { return }
+        useCase.toggleFavorite(with: number) { (result) in
+            switch result {
+            case .added:
+                saveButton.setTitle("Remover", for: .normal)
+            case .removed:
+                saveButton.setTitle("Salvar", for: .normal)
+            default:
+                print()
             }
-            
-            UserDefaults.standard.setValue(filterdSaved, forKeyPath: "SavedItems")
-            print(filterdSaved)
-            return false
-        } else {
-            saved.append(number)
-            UserDefaults.standard.setValue(saved, forKeyPath: "SavedItems")
-            print(saved)
-            return true
         }
     }
     
