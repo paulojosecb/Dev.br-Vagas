@@ -1,8 +1,8 @@
 //
 //  AppDelegate.swift
-//  Dev.br Vagas
+//  recrutamento-ios
 //
-//  Created by Paulo José on 21/10/19.
+//  Created by Paulo José on 15/10/19.
 //  Copyright © 2019 Paulo José. All rights reserved.
 //
 
@@ -12,9 +12,9 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+    
         return true
     }
 
