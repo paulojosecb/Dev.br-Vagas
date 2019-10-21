@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Down
 
 class DetailsView: UIView {
     
@@ -44,13 +45,14 @@ class DetailsView: UIView {
         return label
     }()
     
-    lazy var bodyLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .preferredFont(forTextStyle: .body)
-        label.text = "Body da issue"
-        label.numberOfLines = 0
-        label.textAlignment = .left
+    lazy var bodyView: DownView? = {
+        let label = try? DownView(frame: .zero, markdownString: "")
+        label?.translatesAutoresizingMaskIntoConstraints = false
+        label.
+//        label.font = .preferredFont(forTextStyle: .body)
+//        label.text = "Body da issue"
+//        label.numberOfLines = 0
+//        label.textAlignment = .left
         return label
     }()
     
@@ -87,7 +89,12 @@ class DetailsView: UIView {
         
         titleLabel.text = issue.title
         stateLabel.text = issue.state
-        bodyLabel.text = issue.body
+        
+        do {
+            try bodyView?.update(markdownString: issue.body ?? "")
+        } catch let error {
+            print(error)
+        }
                         
         setupView()
     }
@@ -98,7 +105,7 @@ class DetailsView: UIView {
     
     func calculateContentSize() -> CGFloat {
         let contentSize = (16 + calculateLabelHeightFor(label: titleLabel, and: UIScreen.main.bounds.width) +
-            16 + calculateLabelHeightFor(label: bodyLabel, and: UIScreen.main.bounds.width) + 16 + stateLabel.intrinsicContentSize.height + 16 + 50)
+            16 + 200 + 16 + stateLabel.intrinsicContentSize.height + 16 + 50)
         return contentSize
     }
     
@@ -122,7 +129,7 @@ extension DetailsView: CodeView {
     func buildViewHierarchy() {
         
         contentView.addSubview(titleLabel)
-        contentView.addSubview(bodyLabel)
+        contentView.addSubview(bodyView!)
         contentView.addSubview(stateLabel)
         contentView.addSubview(avatarImageView)
         contentView.addSubview(createdLabel)
@@ -169,10 +176,10 @@ extension DetailsView: CodeView {
         openButton.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         openButton.heightAnchor.constraint(equalToConstant: 48).isActive = true
         
-        bodyLabel.topAnchor.constraint(equalTo: openButton.bottomAnchor, constant: 0).isActive = true
-        bodyLabel.leftAnchor.constraint(equalTo: titleLabel.leftAnchor).isActive = true
-        bodyLabel.rightAnchor.constraint(equalTo: titleLabel.rightAnchor).isActive = true
-        bodyLabel.heightAnchor.constraint(equalToConstant: calculateLabelHeightFor(label: bodyLabel, and: UIScreen.main.bounds.width)).isActive = true
+        bodyView?.topAnchor.constraint(equalTo: openButton.bottomAnchor, constant: 0).isActive = true
+        bodyView?.leftAnchor.constraint(equalTo: titleLabel.leftAnchor).isActive = true
+        bodyView?.rightAnchor.constraint(equalTo: titleLabel.rightAnchor).isActive = true
+        bodyView?.heightAnchor.constraint(equalToConstant: 300).isActive = true
     }
     
     func setupAdditionalConfiguration() {

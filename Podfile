@@ -8,6 +8,7 @@ target 'Dev.br Vagas' do
   # Pods for recrutamento-ios
 
   pod 'Alamofire'
+  pod 'Down'
 
   target 'Dev.br VagasTests' do
     inherit! :search_paths
