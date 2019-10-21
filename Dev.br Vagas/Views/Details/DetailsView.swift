@@ -13,6 +13,9 @@ class DetailsView: UIView {
     
     let issue: Issue
     
+    var bodyViewHeight: CGFloat = 0
+    var bodyViewWidth: CGFloat = 0
+    
     lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -48,12 +51,21 @@ class DetailsView: UIView {
     lazy var bodyView: DownView? = {
         let label = try? DownView(frame: .zero, markdownString: "")
         label?.translatesAutoresizingMaskIntoConstraints = false
-        label.
 //        label.font = .preferredFont(forTextStyle: .body)
 //        label.text = "Body da issue"
 //        label.numberOfLines = 0
 //        label.textAlignment = .left
-        return label
+        return (label ?? nil)
+    }()
+    
+    lazy var saveButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        let saved = UserDefaults.standard.object(forKey: "SavedItems") as? [Int] ?? [Int]()
+        button.setTitle(saved.contains(self.issue.number ?? 0) ? "Remover" : "Salvar", for: .normal)
+        button.setTitleColor(.systemBlue, for: .normal)
+        button.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleSaveButton(_:))))
+        return button
     }()
     
     lazy var openButton: UIButton = {
@@ -90,12 +102,18 @@ class DetailsView: UIView {
         titleLabel.text = issue.title
         stateLabel.text = issue.state
         
-        do {
-            try bodyView?.update(markdownString: issue.body ?? "")
-        } catch let error {
-            print(error)
-        }
-                        
+        try? bodyView?.update(markdownString: issue.body ?? "", didLoadSuccessfully: {
+            let down = Down(markdownString: issue.body ?? "")
+            let height = try! down.toAttributedString().size().height
+            self.bodyViewHeight = (self.bodyView?.scrollView.contentSize.height)!
+            self.bodyViewWidth = (self.bodyView?.scrollView.contentSize.width)!
+            self.bodyView?.heightAnchor.constraint(equalToConstant: (self.bodyView?.scrollView.contentSize.height)! + 10).isActive = true
+            self.bodyView?.widthAnchor.constraint(equalToConstant: (self.bodyView?.scrollView.contentSize.width)!).isActive = true
+            
+            self.contentView.heightAnchor.constraint(equalToConstant: self.calculateContentSize()).isActive = true
+        })
+        
+        
         setupView()
     }
     
@@ -105,7 +123,7 @@ class DetailsView: UIView {
     
     func calculateContentSize() -> CGFloat {
         let contentSize = (16 + calculateLabelHeightFor(label: titleLabel, and: UIScreen.main.bounds.width) +
-            16 + 200 + 16 + stateLabel.intrinsicContentSize.height + 16 + 50)
+            16 + bodyViewHeight / 2.5  + 16 + stateLabel.intrinsicContentSize.height + 16 + 50)
         return contentSize
     }
     
@@ -123,6 +141,31 @@ class DetailsView: UIView {
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
     
+    @objc func handleSaveButton(_ sender: UITapGestureRecognizer? = nil) {
+        guard let number = issue.number else { return }
+        let saved = toggleIssue(with: number)
+        saveButton.setTitle(saved ? "Remover" : "Salvar", for: .normal)
+    }
+    
+    func toggleIssue(with number: Int) -> Bool {
+        var saved = UserDefaults.standard.object(forKey: "SavedItems") as? [Int] ?? [Int]()
+        
+        if (saved.contains(number)) {
+            let filterdSaved = saved.filter { (element) -> Bool in
+                element != number
+            }
+            
+            UserDefaults.standard.setValue(filterdSaved, forKeyPath: "SavedItems")
+            print(filterdSaved)
+            return false
+        } else {
+            saved.append(number)
+            UserDefaults.standard.setValue(saved, forKeyPath: "SavedItems")
+            print(saved)
+            return true
+        }
+    }
+    
 }
 
 extension DetailsView: CodeView {
@@ -133,10 +176,10 @@ extension DetailsView: CodeView {
         contentView.addSubview(stateLabel)
         contentView.addSubview(avatarImageView)
         contentView.addSubview(createdLabel)
+        contentView.addSubview(saveButton)
         contentView.addSubview(openButton)
         
         scrollView.addSubview(contentView)
-        
         addSubview(scrollView)
     }
     
@@ -150,7 +193,6 @@ extension DetailsView: CodeView {
         contentView.leftAnchor.constraint(equalTo: scrollView.leftAnchor).isActive = true
         contentView.rightAnchor.constraint(equalTo: scrollView.rightAnchor).isActive = true
         contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
-        contentView.heightAnchor.constraint(equalToConstant: calculateContentSize()).isActive = true
         contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
         
         titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16).isActive = true
@@ -172,14 +214,18 @@ extension DetailsView: CodeView {
         createdLabel.heightAnchor.constraint(equalToConstant: createdLabel.intrinsicContentSize.height).isActive = true
         createdLabel.widthAnchor.constraint(equalToConstant: createdLabel.intrinsicContentSize.width).isActive = true
         
-        openButton.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 16).isActive = true
+        saveButton.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 16).isActive = true
+        saveButton.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+        saveButton.heightAnchor.constraint(equalToConstant: 48).isActive = true
+        
+        openButton.topAnchor.constraint(equalTo: saveButton.bottomAnchor, constant: 16).isActive = true
         openButton.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         openButton.heightAnchor.constraint(equalToConstant: 48).isActive = true
         
         bodyView?.topAnchor.constraint(equalTo: openButton.bottomAnchor, constant: 0).isActive = true
         bodyView?.leftAnchor.constraint(equalTo: titleLabel.leftAnchor).isActive = true
         bodyView?.rightAnchor.constraint(equalTo: titleLabel.rightAnchor).isActive = true
-        bodyView?.heightAnchor.constraint(equalToConstant: 300).isActive = true
+//        bodyView?.heightAnchor.constraint(equalToConstant: 500).isActive = true
     }
     
     func setupAdditionalConfiguration() {
