@@ -58,30 +58,26 @@ class DetailsView: UIView {
         return (label ?? nil)
     }()
     
-    lazy var saveButton: UIButton = {
-        let button = UIButton()
+    lazy var saveButton: Button = {
+        let button = Button(frame: .zero, type: .normal, title: "Action", action: handleSaveButton)
         button.translatesAutoresizingMaskIntoConstraints = false
         
         self.favoriteUseCase?.isSaved(issue: self.issue, completion: { (result) in
             switch result {
             case let .saved(s):
-                button.setTitle(s ? "Remover" : "Salvar", for: .normal)
+                button.setTitle(s ? "Remover" : "Salvar")
+                button.setType(s ? .destructive : .normal)
             default:
-                button.setTitle("Salvar", for: .normal)
+                button.setTitle("Salvar")
             }
         })
         
-        button.setTitleColor(.systemBlue, for: .normal)
-        button.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleSaveButton(_:))))
         return button
     }()
     
-    lazy var openButton: UIButton = {
-        let button = UIButton()
+    lazy var openButton: Button = {
+        let button = Button(frame: .zero, type: .ghost, title: "Abir no navegador", action: handleOpenButton)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Abrir no navegador", for: .normal)
-        button.setTitleColor(.systemBlue, for: .normal)
-        button.isEnabled = issue.html_url != nil ? true : false
         return button
     }()
     
@@ -146,19 +142,21 @@ class DetailsView: UIView {
         return height + 10
     }
     
-    @objc func handleOpenButton(_ sender: UITapGestureRecognizer? = nil) {
+    @objc func handleOpenButton() {
         guard let issueUrl = issue.html_url, let url = URL(string: issueUrl) else { return }
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
     
-    @objc func handleSaveButton(_ sender: UITapGestureRecognizer? = nil) {
+    @objc func handleSaveButton() {
         guard let number = issue.number, let useCase = favoriteUseCase else { return }
         useCase.toggleFavorite(issue: self.issue) { (result) in
             switch result {
             case .added:
-                saveButton.setTitle("Remover", for: .normal)
+                saveButton.setTitle("Remover")
+                saveButton.setType(.destructive)
             case .removed:
-                saveButton.setTitle("Salvar", for: .normal)
+                saveButton.setTitle("Salvar")
+                saveButton.setType(.normal)
             default:
                 print()
             }
@@ -219,22 +217,24 @@ extension DetailsView: CodeView {
         createdLabel.heightAnchor.constraint(equalToConstant: createdLabel.intrinsicContentSize.height).isActive = true
         createdLabel.widthAnchor.constraint(equalToConstant: createdLabel.intrinsicContentSize.width).isActive = true
         
-        saveButton.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 16).isActive = true
-        saveButton.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-        saveButton.heightAnchor.constraint(equalToConstant: 48).isActive = true
+        openButton.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 32).isActive = true
+        openButton.leftAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leftAnchor).isActive = true
+        openButton.widthAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.45).isActive = true
+        openButton.heightAnchor.constraint(equalToConstant: Button.height).isActive = true
         
-        openButton.topAnchor.constraint(equalTo: saveButton.bottomAnchor, constant: 16).isActive = true
-        openButton.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-        openButton.heightAnchor.constraint(equalToConstant: 48).isActive = true
+        saveButton.topAnchor.constraint(equalTo: openButton.topAnchor).isActive = true
+        saveButton.rightAnchor.constraint(equalTo: contentView.layoutMarginsGuide.rightAnchor).isActive = true
+        saveButton.widthAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.45).isActive = true
+        saveButton.heightAnchor.constraint(equalToConstant: Button.height).isActive = true
         
-        bodyView?.topAnchor.constraint(equalTo: openButton.bottomAnchor, constant: 0).isActive = true
+        bodyView?.topAnchor.constraint(equalTo: openButton.bottomAnchor, constant: 32).isActive = true
         bodyView?.leftAnchor.constraint(equalTo: titleLabel.leftAnchor).isActive = true
         bodyView?.rightAnchor.constraint(equalTo: titleLabel.rightAnchor).isActive = true
 //        bodyView?.heightAnchor.constraint(equalToConstant: 500).isActive = true
     }
     
     func setupAdditionalConfiguration() {
-        openButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleOpenButton(_:))))
+//        openButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleOpenButton(_:))))
     }
     
     

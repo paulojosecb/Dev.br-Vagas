@@ -11,6 +11,8 @@
 		2B0F7B78235E3E6E00D6C119 /* UserDefaultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0F7B77235E3E6E00D6C119 /* UserDefaultManager.swift */; };
 		2B0F7B7E235E3F4700D6C119 /* FavoriteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0F7B7D235E3F4700D6C119 /* FavoriteUseCase.swift */; };
 		2B0F7B80235E3F6B00D6C119 /* FavoriteGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0F7B7F235E3F6B00D6C119 /* FavoriteGateway.swift */; };
+		2B0F7B82235E571200D6C119 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0F7B81235E571200D6C119 /* Button.swift */; };
+		2B0F7B85235E57FD00D6C119 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0F7B84235E57FD00D6C119 /* UIColor.swift */; };
 		2BB44AD3235E15F500DDA0DE /* UserImageGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB44ABB235E15F500DDA0DE /* UserImageGateway.swift */; };
 		2BB44AD4235E15F500DDA0DE /* UserImageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB44ABC235E15F500DDA0DE /* UserImageUseCase.swift */; };
 		2BB44AD5235E15F500DDA0DE /* UserImagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB44ABD235E15F500DDA0DE /* UserImagePresenter.swift */; };
@@ -53,6 +55,8 @@
 		2B0F7B77235E3E6E00D6C119 /* UserDefaultManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultManager.swift; sourceTree = "<group>"; };
 		2B0F7B7D235E3F4700D6C119 /* FavoriteUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteUseCase.swift; sourceTree = "<group>"; };
 		2B0F7B7F235E3F6B00D6C119 /* FavoriteGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteGateway.swift; sourceTree = "<group>"; };
+		2B0F7B81235E571200D6C119 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
+		2B0F7B84235E57FD00D6C119 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		2BB44ABB235E15F500DDA0DE /* UserImageGateway.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserImageGateway.swift; sourceTree = "<group>"; };
 		2BB44ABC235E15F500DDA0DE /* UserImageUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserImageUseCase.swift; sourceTree = "<group>"; };
 		2BB44ABD235E15F500DDA0DE /* UserImagePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserImagePresenter.swift; sourceTree = "<group>"; };
@@ -117,6 +121,14 @@
 			path = Favorite;
 			sourceTree = "<group>";
 		};
+		2B0F7B83235E57F000D6C119 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				2B0F7B84235E57FD00D6C119 /* UIColor.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		2BB44AB9235E15F500DDA0DE /* UseCases */ = {
 			isa = PBXGroup;
 			children = (
@@ -177,6 +189,7 @@
 		2BB44AC9235E15F500DDA0DE /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				2B0F7B83235E57F000D6C119 /* Extensions */,
 				2B0F7B77235E3E6E00D6C119 /* UserDefaultManager.swift */,
 				2BB44ACA235E15F500DDA0DE /* ApiManager.swift */,
 				2BB44ACB235E15F500DDA0DE /* Components */,
@@ -191,6 +204,7 @@
 			children = (
 				2BB44ACC235E15F500DDA0DE /* CardView.swift */,
 				2BB44ACD235E15F500DDA0DE /* IssueCardTableViewCell.swift */,
+				2B0F7B81235E571200D6C119 /* Button.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -455,12 +469,14 @@
 				2BB44AE0235E15F500DDA0DE /* CustomError.swift in Sources */,
 				2BB44AE1235E15F500DDA0DE /* CustomView.swift in Sources */,
 				2BB44AD9235E15F500DDA0DE /* HomeView.swift in Sources */,
+				2B0F7B85235E57FD00D6C119 /* UIColor.swift in Sources */,
 				2BB44ADE235E15F500DDA0DE /* CardView.swift in Sources */,
 				2BB44AD4235E15F500DDA0DE /* UserImageUseCase.swift in Sources */,
 				2BB44ADB235E15F500DDA0DE /* DetailsView.swift in Sources */,
 				2BB44AD3235E15F500DDA0DE /* UserImageGateway.swift in Sources */,
 				2BB44AD6235E15F500DDA0DE /* IssueGateway.swift in Sources */,
 				2BB44ADA235E15F500DDA0DE /* HomeViewController.swift in Sources */,
+				2B0F7B82235E571200D6C119 /* Button.swift in Sources */,
 				2BB44AD5235E15F500DDA0DE /* UserImagePresenter.swift in Sources */,
 				2BB44AE2235E15F500DDA0DE /* CodeView.swift in Sources */,
 				2BB44ADD235E15F500DDA0DE /* ApiManager.swift in Sources */,
