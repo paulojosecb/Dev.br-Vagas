@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Down
+import SwiftyMarkdown
 
 class DetailsView: UIView {
     
@@ -26,6 +26,7 @@ class DetailsView: UIView {
         label.font = .preferredFont(forTextStyle: .title1)
         label.text = "Título da issue"
         label.numberOfLines = 3
+        label.textColor = .white
         return label
     }()
     
@@ -49,13 +50,17 @@ class DetailsView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .preferredFont(forTextStyle: .footnote)
         label.text = "Criado em 16/10/2019"
+        label.textColor = .white
         return label
     }()
     
-    lazy var bodyView: DownView? = {
-        let label = try? DownView(frame: .zero, markdownString: "")
-        label?.translatesAutoresizingMaskIntoConstraints = false
-        return (label ?? nil)
+    lazy var bodyView: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 0
+        label.sizeToFit()
+        label.textColor = .white
+        return label
     }()
     
     lazy var saveButton: Button = {
@@ -101,24 +106,34 @@ class DetailsView: UIView {
     init(frame: CGRect, issue: Issue) {
         self.issue = issue
         super.init(frame: frame)
-        self.backgroundColor = .white
-        
+        self.backgroundColor = .lightBackground
         self.favoriteUseCase = FavoriteUseCase(gateway: UserDefaultManager())
         
         titleLabel.text = issue.title
         stateLabel.text = issue.state
         
-        try? bodyView?.update(markdownString: issue.body ?? "", didLoadSuccessfully: {
-            let down = Down(markdownString: issue.body ?? "")
-            let height = try! down.toAttributedString().size().height
-            self.bodyViewHeight = (self.bodyView?.scrollView.contentSize.height)!
-            self.bodyViewWidth = (self.bodyView?.scrollView.contentSize.width)!
-            self.bodyView?.heightAnchor.constraint(equalToConstant: (self.bodyView?.scrollView.contentSize.height)! + 10).isActive = true
-            self.bodyView?.widthAnchor.constraint(equalToConstant: (self.bodyView?.scrollView.contentSize.width)!).isActive = true
-            
-            self.contentView.heightAnchor.constraint(equalToConstant: self.calculateContentSize()).isActive = true
-        })
+        let md = SwiftyMarkdown(string: issue.body ?? "")
+        md.body.fontName = "Avenir-Regular"
+        md.body.color = .white
+        md.h1.fontName =  "Avenir-Bold"
+        md.h2.fontName =  "Avenir-Bold"
+        md.h3.fontName =  "Avenir-Bold"
+        md.h4.fontName =  "Avenir-Bold"
+        md.h5.fontName =  "Avenir-Bold"
         
+        md.h1.color = .white
+        md.h2.color = .white
+        md.h3.color = .white
+        md.h4.color = .white
+        md.h5.color = .white
+
+
+        bodyView.attributedText = md.attributedString()
+        
+        bodyViewHeight = bodyView.intrinsicContentSize.height
+                
+        self.bodyView.heightAnchor.constraint(equalToConstant: bodyViewHeight).isActive = true
+        self.contentView.heightAnchor.constraint(equalToConstant: self.calculateContentSize()).isActive = true
         
         setupView()
     }
@@ -129,7 +144,7 @@ class DetailsView: UIView {
     
     func calculateContentSize() -> CGFloat {
         let contentSize = (16 + calculateLabelHeightFor(label: titleLabel, and: UIScreen.main.bounds.width) +
-            16 + bodyViewHeight / 2.5  + 16 + stateLabel.intrinsicContentSize.height + 16 + 50)
+            16 + bodyViewHeight  + 16 + stateLabel.intrinsicContentSize.height + 16 + 50)
         return contentSize
     }
     
@@ -175,7 +190,7 @@ extension DetailsView: CodeView {
     func buildViewHierarchy() {
         
         contentView.addSubview(titleLabel)
-        contentView.addSubview(bodyView!)
+        contentView.addSubview(bodyView)
         contentView.addSubview(stateLabel)
         contentView.addSubview(avatarImageView)
         contentView.addSubview(createdLabel)
@@ -227,9 +242,9 @@ extension DetailsView: CodeView {
         saveButton.widthAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.45).isActive = true
         saveButton.heightAnchor.constraint(equalToConstant: Button.height).isActive = true
         
-        bodyView?.topAnchor.constraint(equalTo: openButton.bottomAnchor, constant: 32).isActive = true
-        bodyView?.leftAnchor.constraint(equalTo: titleLabel.leftAnchor).isActive = true
-        bodyView?.rightAnchor.constraint(equalTo: titleLabel.rightAnchor).isActive = true
+        bodyView.topAnchor.constraint(equalTo: openButton.bottomAnchor, constant: 32).isActive = true
+        bodyView.leftAnchor.constraint(equalTo: titleLabel.leftAnchor).isActive = true
+        bodyView.rightAnchor.constraint(equalTo: titleLabel.rightAnchor).isActive = true
 //        bodyView?.heightAnchor.constraint(equalToConstant: 500).isActive = true
     }
     

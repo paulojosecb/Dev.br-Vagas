@@ -89,10 +89,10 @@ class Button: UIView {
             switch type {
             case .ghost:
                 self.backgroundView.backgroundColor = .none
-                self.backgroundView.layer.borderColor = UIColor.primary.cgColor
+                self.backgroundView.layer.borderColor = UIColor.white.cgColor
                 self.backgroundView.layer.borderWidth = 1
                 
-                self.label.textColor = .primary
+                self.label.textColor = .white
             case .normal:
                 self.backgroundView.backgroundColor = .primary
                 self.backgroundView.layer.borderColor = UIColor.primary.cgColor
