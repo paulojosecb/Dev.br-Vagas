@@ -38,6 +38,7 @@ class IssueCardTableViewCell: UITableViewCell {
         label.font = .systemFont(ofSize: 18, weight: .medium)
         label.text = "Título da Issue um tamanho suficiente para ser de duas linhas aaaaaaa"
         label.numberOfLines = 2
+        label.textColor = .white
         return label
     }()
     
@@ -50,12 +51,12 @@ class IssueCardTableViewCell: UITableViewCell {
     }()
     
     override func draw(_ rect: CGRect) {
-        cardView.setRoundedLayer(color: .white, radius: 10, shadowOppacity: 0.5, shadowRadius: 10)
+        cardView.setRoundedLayer(color: UIColor(white: 1, alpha: 0.2), radius: 10, shadowOppacity: 0.5, shadowRadius: 10)
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        contentView.backgroundColor = UIColor(white: 0.95, alpha: 1)
+        contentView.backgroundColor = .lightBackground
         setupView()
     }
     

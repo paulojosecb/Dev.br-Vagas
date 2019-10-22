@@ -10,7 +10,15 @@ import UIKit
 
 extension UIColor {
     @nonobjc class var primary: UIColor {
-        return UIColor(red: 35 / 255, green: 33 / 255, blue: 211 / 255, alpha: 1)
+        return UIColor(red: 74 / 255, green: 77 / 255, blue: 173 / 255, alpha: 1)
+    }
+    
+    @nonobjc class var background: UIColor {
+        return UIColor(red: 35 / 255, green: 40 / 255, blue: 59 / 255, alpha: 1)
+    }
+    
+    @nonobjc class var lightBackground: UIColor {
+        return UIColor(red: 59 / 255, green: 66 / 255, blue: 87 / 255, alpha: 1)
     }
     
     @nonobjc class var destructive: UIColor {

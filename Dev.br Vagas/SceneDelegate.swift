@@ -23,11 +23,31 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.windowScene = windowScene
         
         let navigationController = UINavigationController(rootViewController: HomeViewController(mode: .all))
+        
         navigationController.navigationBar.prefersLargeTitles = true
+        navigationController.navigationBar.tintColor = .white
         
-        navigationController.navigationBar.isTranslucent = true
-        navigationController.navigationBar.shadowImage = UIImage()
-        
+        if #available(iOS 13.0, *) {
+            let navBarAppearance = UINavigationBarAppearance()
+            navBarAppearance.configureWithOpaqueBackground()
+            navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor(white: 1, alpha: 0.9)]
+            navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor(white: 1, alpha: 0.9)]
+            navBarAppearance.backgroundColor = .lightBackground
+            navBarAppearance.shadowColor = .none
+            navBarAppearance.shadowImage = UIImage()
+            navigationController.navigationBar.standardAppearance = navBarAppearance
+            navigationController.navigationBar.scrollEdgeAppearance = navBarAppearance
+        } else {
+            navigationController.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
+            navigationController.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
+            navigationController.navigationBar.isTranslucent = false
+            navigationController.navigationBar.shadowImage = UIImage()
+            navigationController.navigationBar.barTintColor = .lightBackground
+            navigationController.navigationBar.backgroundColor = .lightBackground
+        }
+    
+            
+        navigationController.navigationBar.shadowImage = .none
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
     }

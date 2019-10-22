@@ -19,7 +19,7 @@ class HomeView: UIView {
         tableView.dataSource = self.parentVC
         tableView.register(IssueCardTableViewCell.self, forCellReuseIdentifier: String(describing: IssueCardTableViewCell.self))
         tableView.separatorStyle = .none
-        tableView.backgroundColor = UIColor(white: 0.95, alpha: 1)
+        tableView.backgroundColor = .lightBackground
         return tableView
     }()
     
