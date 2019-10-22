@@ -11,5 +11,6 @@ import Foundation
 class User: NSObject, Codable {
     
     var avatar_url: String?
+    var login: String?
     
 }

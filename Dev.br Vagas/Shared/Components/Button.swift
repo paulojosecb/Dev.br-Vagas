@@ -49,20 +49,7 @@ class Button: UIView {
     }
     
     override func layoutSubviews() {
-//        if (type == .normal) {
-//            let shadowLayer = CAShapeLayer()
-//            shadowLayer.masksToBounds = false
-//            
-//            shadowLayer.path = UIBezierPath(roundedRect: self.bounds, cornerRadius: 5).cgPath
-//            shadowLayer.fillColor = UIColor.white.cgColor
-//            shadowLayer.shadowColor = UIColor.gray.cgColor
-//            shadowLayer.shadowPath = shadowLayer.path
-//            shadowLayer.shadowOffset = CGSize(width: 0.0, height: 3.0)
-//            shadowLayer.shadowOpacity = 0.3
-//            shadowLayer.shadowRadius = 3
-//            
-//            self.layer.insertSublayer(shadowLayer, at: 0)
-//        }
+        addShadow()
     }
     
     required init?(coder: NSCoder) {
@@ -75,6 +62,23 @@ class Button: UIView {
         
         let feedbackGenerator = UISelectionFeedbackGenerator()
         feedbackGenerator.selectionChanged()
+    }
+    
+    func addShadow() {
+        if (type == .normal) {
+            let shadowLayer = CAShapeLayer()
+            shadowLayer.masksToBounds = false
+            
+            shadowLayer.path = UIBezierPath(roundedRect: self.bounds, cornerRadius: 5).cgPath
+            shadowLayer.fillColor = UIColor.darkBackground.cgColor
+            shadowLayer.shadowColor = UIColor.darkBackground.cgColor
+            shadowLayer.shadowPath = shadowLayer.path
+            shadowLayer.shadowOffset = CGSize(width: 0.0, height: 5.0)
+            shadowLayer.shadowOpacity = 0.5
+            shadowLayer.shadowRadius = 3
+            
+            self.layer.insertSublayer(shadowLayer, at: 0)
+        }
     }
     
     func setTitle(_ title: String) {
@@ -94,14 +98,11 @@ class Button: UIView {
                 
                 self.label.textColor = .white
             case .normal:
-                self.backgroundView.backgroundColor = .primary
-                self.backgroundView.layer.borderColor = UIColor.primary.cgColor
+                self.backgroundView.backgroundColor = .darkBackground
+                self.backgroundView.layer.borderColor = UIColor.darkBackground.cgColor
                 self.label.textColor = .white
             case .destructive:
-                self.backgroundView.backgroundColor = .none
-                self.backgroundView.layer.borderColor = UIColor.destructive.cgColor
-                self.backgroundView.layer.borderWidth = 1
-                self.label.textColor = .destructive
+                self.label.textColor = .white
             }
         }
         

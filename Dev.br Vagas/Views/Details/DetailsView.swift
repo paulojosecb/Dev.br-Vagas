@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftyMarkdown
+import Down
 
 class DetailsView: UIView {
     
@@ -30,12 +31,24 @@ class DetailsView: UIView {
         return label
     }()
     
+    lazy var localLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = .preferredFont(forTextStyle: .headline)
+        label.text = "em Rio de Janeiro/Remoto"
+        label.textColor = .white
+        return label
+    }()
+    
     lazy var stateLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .preferredFont(forTextStyle: .title3)
+        label.font = .systemFont(ofSize: 18, weight: .bold)
         label.backgroundColor = issue.state == "open" ? .systemGreen : .systemRed
         label.textColor = .white
+        label.textAlignment = .center
+        label.layer.masksToBounds = true
+        label.layer.cornerRadius = 2
         return label
     }()
     
@@ -49,7 +62,16 @@ class DetailsView: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .preferredFont(forTextStyle: .footnote)
-        label.text = "Criado em 16/10/2019"
+        label.text = "Criado em \(issue.created_at ?? "")"
+        label.textColor = .white
+        return label
+    }()
+    
+    lazy var byLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = .preferredFont(forTextStyle: .footnote)
+        label.text = "Por em eumesmo"
         label.textColor = .white
         return label
     }()
@@ -109,26 +131,27 @@ class DetailsView: UIView {
         self.backgroundColor = .lightBackground
         self.favoriteUseCase = FavoriteUseCase(gateway: UserDefaultManager())
         
-        titleLabel.text = issue.title
-        stateLabel.text = issue.state
+        let title = issue.title
+        let range = title?.range(of: "]")
         
-        let md = SwiftyMarkdown(string: issue.body ?? "")
-        md.body.fontName = "Avenir-Regular"
-        md.body.color = .white
-        md.h1.fontName =  "Avenir-Bold"
-        md.h2.fontName =  "Avenir-Bold"
-        md.h3.fontName =  "Avenir-Bold"
-        md.h4.fontName =  "Avenir-Bold"
-        md.h5.fontName =  "Avenir-Bold"
+        let titleString = title?[range!.upperBound...].trimmingCharacters(in: .whitespaces)
+        let localString = title?[..<range!.lowerBound].replacingOccurrences(of: "[", with: "")
         
-        md.h1.color = .white
-        md.h2.color = .white
-        md.h3.color = .white
-        md.h4.color = .white
-        md.h5.color = .white
-
-
-        bodyView.attributedText = md.attributedString()
+        titleLabel.text = titleString ?? ""
+        localLabel.text = "em \(localString ?? "")"
+        stateLabel.text = issue.state == "open" ? "Aberta" : "Fechada"
+        byLabel.text = "por \(issue.user?.login ?? "")"
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        formatter.locale = Locale(identifier: "pt-BR")
+        let date = formatter.date(from: issue.created_at!) ?? Date()
+        let ptFormatter = DateFormatter()
+        ptFormatter.dateFormat = "dd/MM/yyyy"
+        let dateString = ptFormatter.string(from: date)
+        createdLabel.text = "Postad em \(dateString)"
+        
+        bodyView.attributedText = try! Down(markdownString: issue.body ?? "").toAttributedString(.default, stylesheet: "* {font-family: -apple-system; font-size: 1.2rem; color: white } code, pre { font-family: Menlo }")
         
         bodyViewHeight = bodyView.intrinsicContentSize.height
                 
@@ -144,7 +167,7 @@ class DetailsView: UIView {
     
     func calculateContentSize() -> CGFloat {
         let contentSize = (16 + calculateLabelHeightFor(label: titleLabel, and: UIScreen.main.bounds.width) +
-            16 + bodyViewHeight  + 16 + stateLabel.intrinsicContentSize.height + 16 + 50)
+            16 + bodyViewHeight + 300 + 16 + stateLabel.intrinsicContentSize.height + 16 + 50)
         return contentSize
     }
     
@@ -190,10 +213,12 @@ extension DetailsView: CodeView {
     func buildViewHierarchy() {
         
         contentView.addSubview(titleLabel)
+        contentView.addSubview(localLabel)
         contentView.addSubview(bodyView)
         contentView.addSubview(stateLabel)
         contentView.addSubview(avatarImageView)
         contentView.addSubview(createdLabel)
+        contentView.addSubview(byLabel)
         contentView.addSubview(saveButton)
         contentView.addSubview(openButton)
         
@@ -218,19 +243,30 @@ extension DetailsView: CodeView {
         titleLabel.rightAnchor.constraint(equalTo: contentView.layoutMarginsGuide.rightAnchor, constant: -8).isActive = true
         titleLabel.heightAnchor.constraint(equalToConstant: calculateLabelHeightFor(label: titleLabel, and: UIScreen.main.bounds.width) + 30).isActive = true
         
-        stateLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 16).isActive = true
-        stateLabel.leftAnchor.constraint(equalTo: titleLabel.leftAnchor).isActive = true
-        stateLabel.heightAnchor.constraint(equalToConstant: stateLabel.intrinsicContentSize.height).isActive = true
+        localLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 4).isActive = true
+        localLabel.leftAnchor.constraint(equalTo: titleLabel.leftAnchor).isActive = true
+        localLabel.heightAnchor.constraint(equalToConstant: localLabel.intrinsicContentSize.height).isActive = true
+        localLabel.rightAnchor.constraint(equalTo: titleLabel.rightAnchor).isActive = true
         
-        avatarImageView.topAnchor.constraint(equalTo: stateLabel.bottomAnchor, constant: 16).isActive = true
+        stateLabel.centerYAnchor.constraint(equalTo: avatarImageView.centerYAnchor).isActive = true
+        stateLabel.rightAnchor.constraint(equalTo: contentView.layoutMarginsGuide.rightAnchor).isActive = true
+        stateLabel.heightAnchor.constraint(equalToConstant: stateLabel.intrinsicContentSize.height).isActive = true
+        stateLabel.widthAnchor.constraint(equalToConstant: stateLabel.intrinsicContentSize.width + 16).isActive = true
+       
+        avatarImageView.topAnchor.constraint(equalTo: localLabel.bottomAnchor, constant: 24).isActive = true
         avatarImageView.leftAnchor.constraint(equalTo: titleLabel.leftAnchor).isActive = true
         avatarImageView.widthAnchor.constraint(equalToConstant: 50).isActive = true
         avatarImageView.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
-        createdLabel.centerYAnchor.constraint(equalTo: avatarImageView.centerYAnchor).isActive = true
+        createdLabel.centerYAnchor.constraint(equalTo: avatarImageView.topAnchor, constant: 16).isActive = true
         createdLabel.leftAnchor.constraint(equalTo: avatarImageView.rightAnchor, constant: 8).isActive = true
         createdLabel.heightAnchor.constraint(equalToConstant: createdLabel.intrinsicContentSize.height).isActive = true
         createdLabel.widthAnchor.constraint(equalToConstant: createdLabel.intrinsicContentSize.width).isActive = true
+        
+        byLabel.topAnchor.constraint(equalTo: createdLabel.bottomAnchor, constant:  2).isActive = true
+        byLabel.leftAnchor.constraint(equalTo: createdLabel.leftAnchor).isActive = true
+        byLabel.heightAnchor.constraint(equalToConstant: byLabel.intrinsicContentSize.height).isActive = true
+        byLabel.widthAnchor.constraint(equalToConstant: byLabel.intrinsicContentSize.width + 16).isActive = true
         
         openButton.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 32).isActive = true
         openButton.leftAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leftAnchor).isActive = true

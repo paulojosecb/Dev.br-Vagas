@@ -98,7 +98,8 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
         
         cell.title = issues[indexPath.row].title
         cell.state = issues[indexPath.row].state
-        
+        cell.createdAt = issues[indexPath.row].created_at
+            
         cell.selectionStyle = .none
         
         return cell

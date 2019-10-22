@@ -37,6 +37,7 @@
 		2BDAE301235E157D002DBE84 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2BDAE300235E157D002DBE84 /* Assets.xcassets */; };
 		2BDAE304235E157D002DBE84 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2BDAE302235E157D002DBE84 /* LaunchScreen.storyboard */; };
 		2BDAE30F235E157D002DBE84 /* Dev_br_VagasTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BDAE30E235E157D002DBE84 /* Dev_br_VagasTests.swift */; };
+		2BED14D3235FA35F00A9BF35 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BED14D2235FA35F00A9BF35 /* Label.swift */; };
 		3FACB738C776FCED767F965A /* Pods_Dev_br_Vagas.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DAE6BB6F3C2CC0D1A0A12AE /* Pods_Dev_br_Vagas.framework */; };
 /* End PBXBuildFile section */
 
@@ -85,6 +86,7 @@
 		2BDAE30A235E157D002DBE84 /* Dev.br VagasTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Dev.br VagasTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BDAE30E235E157D002DBE84 /* Dev_br_VagasTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dev_br_VagasTests.swift; sourceTree = "<group>"; };
 		2BDAE310235E157D002DBE84 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2BED14D2235FA35F00A9BF35 /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
 		6F522D2E25062360F62EF483 /* Pods-Dev.br Vagas.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dev.br Vagas.release.xcconfig"; path = "Target Support Files/Pods-Dev.br Vagas/Pods-Dev.br Vagas.release.xcconfig"; sourceTree = "<group>"; };
 		9352AD7097F5D13AE0DD8521 /* Pods-Dev.br Vagas.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dev.br Vagas.debug.xcconfig"; path = "Target Support Files/Pods-Dev.br Vagas/Pods-Dev.br Vagas.debug.xcconfig"; sourceTree = "<group>"; };
 		9536202F30F4E5AFB120E7C9 /* Pods-Dev.br VagasTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dev.br VagasTests.release.xcconfig"; path = "Target Support Files/Pods-Dev.br VagasTests/Pods-Dev.br VagasTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -224,6 +226,7 @@
 			children = (
 				2BB44AE5235E160200DDA0DE /* User.swift */,
 				2BB44AE6235E160200DDA0DE /* Issue.swift */,
+				2BED14D2235FA35F00A9BF35 /* Label.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -483,6 +486,7 @@
 				2BDAE2F8235E157B002DBE84 /* AppDelegate.swift in Sources */,
 				2BB44ADF235E15F500DDA0DE /* IssueCardTableViewCell.swift in Sources */,
 				2B0F7B78235E3E6E00D6C119 /* UserDefaultManager.swift in Sources */,
+				2BED14D3235FA35F00A9BF35 /* Label.swift in Sources */,
 				2BB44ADC235E15F500DDA0DE /* DetailsViewController.swift in Sources */,
 				2BDAE2FA235E157B002DBE84 /* SceneDelegate.swift in Sources */,
 				2BB44AE7235E160200DDA0DE /* User.swift in Sources */,

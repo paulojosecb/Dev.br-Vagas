@@ -17,6 +17,7 @@ struct Issue: Codable, Equatable {
     var user: User?
     var html_url: String?
     var created_at: String?
+    var labels: [Label]?
     
     static func ==(lhs: Issue, rhs: Issue) -> Bool {
         return lhs.number == rhs.number
