@@ -10,7 +10,15 @@ import Foundation
 import Alamofire
 
 class ApiManager: IssueGateway, UserImageGateway, LabelGateway {
-
+    
+    func add(label: Label, completion: @escaping ((LabelUseCaseResult<Label>) -> Void)) {
+        
+    }
+    
+    func remove(label: Label, completion: @escaping ((LabelUseCaseResult<Label>) -> Void)) {
+        
+    }
+    
     let base_url = "https://api.github.com/repos/frontendbr/vagas/"
     
     func fetchIssues(completion: @escaping (IssueUseCaseResult<[Issue]>) -> Void) {

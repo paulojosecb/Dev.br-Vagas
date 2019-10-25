@@ -23,7 +23,7 @@ class UserDefaultManager: FavoriteGateway, IssueGateway, LabelGateway {
         do {
             var labels = try getLabels()
             
-            if (!labels.contains(label)) {
+            if (!label.isOnCollection(labels)) {
                 labels.append(label)
                 try save(labels)
                 completion(.sucess(labels))
@@ -38,7 +38,7 @@ class UserDefaultManager: FavoriteGateway, IssueGateway, LabelGateway {
         do {
             let labels = try getLabels()
             
-            if (labels.contains(label)) {
+            if (label.isOnCollection(labels)) {
                 let newLabels = labels.filter { (l) -> Bool in
                     return l.id != label.id
                 }

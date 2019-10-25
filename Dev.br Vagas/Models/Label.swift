@@ -17,4 +17,11 @@ class Label: NSObject, Codable {
     static func ==(lhs: Label, rhs: Label) -> Bool {
         return lhs.id == rhs.id
     }
+    
+    func isOnCollection(_ issues: [Label]) -> Bool {
+        let firstLabel = issues.first { (l) -> Bool in
+            l.id == self.id
+        }
+        return firstLabel != nil ? true : false
+    }
 }

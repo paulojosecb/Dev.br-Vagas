@@ -44,6 +44,7 @@ class HomeViewController: UIViewController {
                 
         if (mode == .all) {
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Favoritos", style: .plain, target: self, action: #selector(presentFavorites))
+            self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Filtros", style: .plain, target: self, action: #selector(presentFilter))
         }
 
         self.contentView = HomeView(frame: self.view.bounds, parentVC: self)
@@ -68,6 +69,11 @@ class HomeViewController: UIViewController {
     @objc func presentFavorites() {
         let vc = HomeViewController(mode: .favorites)
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @objc func presentFilter() {
+        let vc = FilterViewController()
+        self.navigationController?.present(vc, animated: true, completion: nil)
     }
 
 }

@@ -23,4 +23,12 @@ class LabelUseCase {
     func fetchLabels(completion: @escaping (LabelUseCaseResult<Label>) -> Void) {
         gateway.fetchLabels(completion: completion)
     }
+    
+    func add(label: Label, completion: @escaping (LabelUseCaseResult<Label>) -> Void) {
+        gateway.add(label: label, completion: completion)
+    }
+    
+    func remove(label: Label, completion: @escaping (LabelUseCaseResult<Label>) -> Void) {
+        gateway.remove(label: label, completion: completion)
+    }
 }

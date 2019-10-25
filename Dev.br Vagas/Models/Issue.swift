@@ -22,4 +22,5 @@ struct Issue: Codable, Equatable {
     static func ==(lhs: Issue, rhs: Issue) -> Bool {
         return lhs.number == rhs.number
     }
+
 }
