@@ -9,16 +9,28 @@
 import Foundation
 import Alamofire
 
-class ApiManager: IssueGateway, UserImageGateway {
+class ApiManager: IssueGateway, UserImageGateway, LabelGateway {
 
-    let base_url = "https://api.github.com/repos/frontendbr/vagas/issues"
+    let base_url = "https://api.github.com/repos/frontendbr/vagas/"
     
     func fetchIssues(completion: @escaping (IssueUseCaseResult<[Issue]>) -> Void) {
-        Alamofire.request(base_url).responseData { (data) in
+        Alamofire.request("\(base_url)issues").responseData { (data) in
             do {
                 guard let data = data.data else { return }
                 let issues = try JSONDecoder().decode([Issue].self, from: data)
                 completion(.sucess(issues))
+            } catch let error {
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func fetchLabels(completion: @escaping ((LabelUseCaseResult<Label>) -> Void)) {
+        Alamofire.request("\(base_url)labels").responseData { (data) in
+            do {
+                guard let data = data.data else { return }
+                let labels = try JSONDecoder().decode([Label].self, from: data)
+                completion(.sucess(labels))
             } catch let error {
                 completion(.failure(error))
             }
@@ -38,7 +50,7 @@ class ApiManager: IssueGateway, UserImageGateway {
 //    }
         
     func fetchUserImage(with url: String, completion: @escaping (ImageFetchResult<Data>) -> Void) {
-        Alamofire.request(url).responseData { (data) in
+        Alamofire.request("\(base_url)issues").responseData { (data) in
             
             guard let data = data.data else {
                 let error = CustomError(description: "Não foi possível dar fetch na imagem")

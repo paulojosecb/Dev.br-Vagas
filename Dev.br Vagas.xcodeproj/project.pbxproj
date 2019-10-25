@@ -13,6 +13,8 @@
 		2B0F7B80235E3F6B00D6C119 /* FavoriteGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0F7B7F235E3F6B00D6C119 /* FavoriteGateway.swift */; };
 		2B0F7B82235E571200D6C119 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0F7B81235E571200D6C119 /* Button.swift */; };
 		2B0F7B85235E57FD00D6C119 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0F7B84235E57FD00D6C119 /* UIColor.swift */; };
+		2BA592452363138400825AFB /* LabelUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA592442363138400825AFB /* LabelUseCase.swift */; };
+		2BA592472363139000825AFB /* LabelGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA592462363139000825AFB /* LabelGateway.swift */; };
 		2BB44AD3235E15F500DDA0DE /* UserImageGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB44ABB235E15F500DDA0DE /* UserImageGateway.swift */; };
 		2BB44AD4235E15F500DDA0DE /* UserImageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB44ABC235E15F500DDA0DE /* UserImageUseCase.swift */; };
 		2BB44AD5235E15F500DDA0DE /* UserImagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB44ABD235E15F500DDA0DE /* UserImagePresenter.swift */; };
@@ -58,6 +60,8 @@
 		2B0F7B7F235E3F6B00D6C119 /* FavoriteGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteGateway.swift; sourceTree = "<group>"; };
 		2B0F7B81235E571200D6C119 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		2B0F7B84235E57FD00D6C119 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		2BA592442363138400825AFB /* LabelUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelUseCase.swift; sourceTree = "<group>"; };
+		2BA592462363139000825AFB /* LabelGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelGateway.swift; sourceTree = "<group>"; };
 		2BB44ABB235E15F500DDA0DE /* UserImageGateway.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserImageGateway.swift; sourceTree = "<group>"; };
 		2BB44ABC235E15F500DDA0DE /* UserImageUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserImageUseCase.swift; sourceTree = "<group>"; };
 		2BB44ABD235E15F500DDA0DE /* UserImagePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserImagePresenter.swift; sourceTree = "<group>"; };
@@ -131,9 +135,19 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		2BA592432363137500825AFB /* Label */ = {
+			isa = PBXGroup;
+			children = (
+				2BA592442363138400825AFB /* LabelUseCase.swift */,
+				2BA592462363139000825AFB /* LabelGateway.swift */,
+			);
+			path = Label;
+			sourceTree = "<group>";
+		};
 		2BB44AB9235E15F500DDA0DE /* UseCases */ = {
 			isa = PBXGroup;
 			children = (
+				2BA592432363137500825AFB /* Label */,
 				2B0F7B79235E3EA300D6C119 /* Favorite */,
 				2BB44ABA235E15F500DDA0DE /* UserImage */,
 				2BB44ABE235E15F500DDA0DE /* Issue */,
@@ -469,6 +483,7 @@
 				2BB44AE3235E15F500DDA0DE /* AvatarImageView.swift in Sources */,
 				2B0F7B80235E3F6B00D6C119 /* FavoriteGateway.swift in Sources */,
 				2BB44AD7235E15F500DDA0DE /* IssuePresenter.swift in Sources */,
+				2BA592452363138400825AFB /* LabelUseCase.swift in Sources */,
 				2BB44AE0235E15F500DDA0DE /* CustomError.swift in Sources */,
 				2BB44AE1235E15F500DDA0DE /* CustomView.swift in Sources */,
 				2BB44AD9235E15F500DDA0DE /* HomeView.swift in Sources */,
@@ -488,6 +503,7 @@
 				2B0F7B78235E3E6E00D6C119 /* UserDefaultManager.swift in Sources */,
 				2BED14D3235FA35F00A9BF35 /* Label.swift in Sources */,
 				2BB44ADC235E15F500DDA0DE /* DetailsViewController.swift in Sources */,
+				2BA592472363139000825AFB /* LabelGateway.swift in Sources */,
 				2BDAE2FA235E157B002DBE84 /* SceneDelegate.swift in Sources */,
 				2BB44AE7235E160200DDA0DE /* User.swift in Sources */,
 			);

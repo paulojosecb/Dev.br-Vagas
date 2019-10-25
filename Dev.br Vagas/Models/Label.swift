@@ -10,7 +10,11 @@ import Foundation
 
 class Label: NSObject, Codable {
     
+    var id: Int?
     var name: String?
     var color: String?
     
+    static func ==(lhs: Label, rhs: Label) -> Bool {
+        return lhs.id == rhs.id
+    }
 }
