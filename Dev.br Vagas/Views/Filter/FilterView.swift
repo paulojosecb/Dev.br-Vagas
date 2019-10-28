@@ -43,12 +43,12 @@ class FilterView: UIView {
         return label
     }()
     
-    lazy var closeImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.image = UIImage(named: "close") ?? UIImage()
-        imageView.contentMode = .scaleToFill
-        return imageView
+    lazy var closeImageView: UIButton = {
+        let button = UIButton(type: .custom)
+        button.setImage(UIImage(named: "close"), for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleCloseTapGesture(_:))))
+        return button
     }()
     
     lazy var tableView: UITableView = {
@@ -111,7 +111,7 @@ extension FilterView: CodeView {
     }
     
     func setupAdditionalConfiguration() {
-        closeImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleCloseTapGesture(_:))))
+        
     }
 }
 
