@@ -10,7 +10,7 @@ import UIKit
 
 class IssueCardTableViewCell: UITableViewCell {
     
-    static var height: CGFloat = 124
+    static var height: CGFloat = 114
     
     var title: String? {
         didSet {
@@ -60,15 +60,6 @@ class IssueCardTableViewCell: UITableViewCell {
         return label
     }()
     
-//    lazy var createdAtLabel: UILabel = {
-//        let label = UILabel()
-//        label.translatesAutoresizingMaskIntoConstraints = false
-//        label.font = .preferredFont(forTextStyle: .footnote)
-//        label.text = "22/10/2019"
-//        label.textColor = UIColor(white: 1, alpha: 0.8)
-//        return label
-//    }()
-    
     lazy var localLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -77,17 +68,19 @@ class IssueCardTableViewCell: UITableViewCell {
         label.textColor = .black40
         return label
     }()
+    
+    lazy var tagView: Tag = {
+        let tag = Tag(frame: .zero, name: "PJ")
+        tag.translatesAutoresizingMaskIntoConstraints = false
+        return tag
+    }()
         
-//    lazy var stateLabel: UILabel = {
-//       let label = UILabel()
-//        label.translatesAutoresizingMaskIntoConstraints = false
-//        label.text = "Aberta"
-//        label.textAlignment = .center
-//        label.font = .systemFont(ofSize: 18, weight: .bold)
-//        label.layer.masksToBounds = true
-//        label.layer.cornerRadius = 2
-//        return label
-//    }()
+    lazy var hearthButton: HeathButton = {
+        let view = HeathButton()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleFavoriteGesture(_:))))
+        return view
+    }()
     
     override func draw(_ rect: CGRect) {
         cardView.setRoundedLayer(color: .white, radius: 10, shadowOppacity: 0.5, shadowRadius: 10)
@@ -101,6 +94,10 @@ class IssueCardTableViewCell: UITableViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    @objc func handleFavoriteGesture(_ sender: UITapGestureRecognizer? = nil) {
+        self.hearthButton.filled = !self.hearthButton.filled
     }
     
     func calculateLabelHeightFor(label: UILabel, and width: CGFloat) -> CGFloat {
@@ -119,14 +116,15 @@ extension IssueCardTableViewCell: CodeView {
         contentView.addSubview(cardView)
         contentView.addSubview(titleLabel)
         contentView.addSubview(localLabel)
-//        contentView.addSubview(createdAtLabel)
+        contentView.addSubview(tagView)
+        contentView.addSubview(hearthButton)
     }
     
     func setupConstraints() {
         cardView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
         cardView.leftAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leftAnchor).isActive = true
         cardView.rightAnchor.constraint(equalTo: contentView.layoutMarginsGuide.rightAnchor).isActive = true
-        cardView.heightAnchor.constraint(equalToConstant: 103).isActive = true
+        cardView.heightAnchor.constraint(equalToConstant: 93).isActive = true
         
         titleLabel.topAnchor.constraint(equalTo: cardView.topAnchor, constant: 8).isActive = true
         titleLabel.leftAnchor.constraint(equalTo: cardView.layoutMarginsGuide.leftAnchor).isActive = true
@@ -138,15 +136,13 @@ extension IssueCardTableViewCell: CodeView {
         localLabel.widthAnchor.constraint(equalTo: cardView.widthAnchor, multiplier: 0.75).isActive = true
         localLabel.heightAnchor.constraint(equalToConstant: localLabel.intrinsicContentSize.height).isActive = true
         
-//        createdAtLabel.centerYAnchor.constraint(equalTo: localLabel.centerYAnchor).isActive = true
-//        createdAtLabel.rightAnchor.constraint(equalTo: cardView.layoutMarginsGuide.rightAnchor).isActive = true
-//        createdAtLabel.heightAnchor.constraint(equalToConstant: createdAtLabel.intrinsicContentSize.height).isActive = true
-//        createdAtLabel.widthAnchor.constraint(equalToConstant: createdAtLabel.intrinsicContentSize.width).isActive = true
+        tagView.topAnchor.constraint(equalTo: localLabel.bottomAnchor, constant: 9).isActive = true
+        tagView.leftAnchor.constraint(equalTo: titleLabel.leftAnchor).isActive = true
         
-//        stateLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 0).isActive = true
-//        stateLabel.rightAnchor.constraint(equalTo: cardView.layoutMarginsGuide.rightAnchor).isActive = true
-//        stateLabel.widthAnchor.constraint(equalToConstant: stateLabel.intrinsicContentSize.width + 4).isActive = true
-//        stateLabel.heightAnchor.constraint(equalToConstant: stateLabel.intrinsicContentSize.height).isActive = true
+        hearthButton.widthAnchor.constraint(equalToConstant: 24).isActive = true
+        hearthButton.heightAnchor.constraint(equalToConstant: 24).isActive = true
+        hearthButton.rightAnchor.constraint(equalTo: cardView.layoutMarginsGuide.rightAnchor, constant: -4).isActive = true
+        hearthButton.centerYAnchor.constraint(equalTo: tagView.centerYAnchor).isActive = true
     }
 
     func setupAdditionalConfiguration() {
