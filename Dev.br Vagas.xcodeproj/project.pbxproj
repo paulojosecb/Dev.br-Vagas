@@ -52,6 +52,7 @@
 		2BDAE304235E157D002DBE84 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2BDAE302235E157D002DBE84 /* LaunchScreen.storyboard */; };
 		2BDAE30F235E157D002DBE84 /* Dev_br_VagasTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BDAE30E235E157D002DBE84 /* Dev_br_VagasTests.swift */; };
 		2BED14D3235FA35F00A9BF35 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BED14D2235FA35F00A9BF35 /* Label.swift */; };
+		2BF373D22367843D00D279F4 /* FIlterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF373D12367843D00D279F4 /* FIlterTableViewCell.swift */; };
 		3FACB738C776FCED767F965A /* Pods_Dev_br_Vagas.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DAE6BB6F3C2CC0D1A0A12AE /* Pods_Dev_br_Vagas.framework */; };
 /* End PBXBuildFile section */
 
@@ -115,6 +116,7 @@
 		2BDAE30E235E157D002DBE84 /* Dev_br_VagasTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dev_br_VagasTests.swift; sourceTree = "<group>"; };
 		2BDAE310235E157D002DBE84 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2BED14D2235FA35F00A9BF35 /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
+		2BF373D12367843D00D279F4 /* FIlterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FIlterTableViewCell.swift; sourceTree = "<group>"; };
 		6F522D2E25062360F62EF483 /* Pods-Dev.br Vagas.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dev.br Vagas.release.xcconfig"; path = "Target Support Files/Pods-Dev.br Vagas/Pods-Dev.br Vagas.release.xcconfig"; sourceTree = "<group>"; };
 		9352AD7097F5D13AE0DD8521 /* Pods-Dev.br Vagas.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dev.br Vagas.debug.xcconfig"; path = "Target Support Files/Pods-Dev.br Vagas/Pods-Dev.br Vagas.debug.xcconfig"; sourceTree = "<group>"; };
 		9536202F30F4E5AFB120E7C9 /* Pods-Dev.br VagasTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dev.br VagasTests.release.xcconfig"; path = "Target Support Files/Pods-Dev.br VagasTests/Pods-Dev.br VagasTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -273,6 +275,7 @@
 				2BA5925E2367514900825AFB /* HearthButton.swift */,
 				2BA592602367562800825AFB /* Tag.swift */,
 				2BA592622367593E00825AFB /* CloudTag.swift */,
+				2BF373D12367843D00D279F4 /* FIlterTableViewCell.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -542,6 +545,7 @@
 				2BB44AD7235E15F500DDA0DE /* IssuePresenter.swift in Sources */,
 				2BA592452363138400825AFB /* LabelUseCase.swift in Sources */,
 				2BB44AE0235E15F500DDA0DE /* CustomError.swift in Sources */,
+				2BF373D22367843D00D279F4 /* FIlterTableViewCell.swift in Sources */,
 				2BA592632367593E00825AFB /* CloudTag.swift in Sources */,
 				2BB44AE1235E15F500DDA0DE /* CustomView.swift in Sources */,
 				2BB44AD9235E15F500DDA0DE /* HomeView.swift in Sources */,

@@ -58,6 +58,8 @@ class FilterView: UIView {
         tableView.dataSource = self
         tableView.backgroundColor = .background
         tableView.allowsMultipleSelection = true
+        tableView.separatorStyle = .none
+        tableView.register(FilterTableViewCell.self, forCellReuseIdentifier: String(describing: FilterTableViewCell.self))
         return tableView
     }()
 
@@ -119,34 +121,35 @@ extension FilterView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let labels = self.labels, let savedLabels = savedLabels else { return UITableViewCell() }
-        let cell = UITableViewCell()
-        cell.textLabel?.text = labels[indexPath.row].name
+        guard let labels = self.labels,
+            let savedLabels = savedLabels,
+            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: FilterTableViewCell.self), for: indexPath) as? FilterTableViewCell else { return UITableViewCell() }
+
+        cell.label.text = labels[indexPath.row].name
+        cell.cellSelected = labels[indexPath.row].isOnCollection(savedLabels) ? true : false
         
-        cell.backgroundColor = .background
-        cell.textLabel?.textColor = .white
-//        cell.selectionStyle = .none
-        cell.accessoryType = labels[indexPath.row].isOnCollection(savedLabels) ? .checkmark : .none
+        cell.selectionStyle = .none
+        
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let savedLabels = savedLabels,
             let labels = labels,
-            let addAction = addAction else { return }
+            let addAction = addAction,
+            let removeAction = removeAction else { return }
             
         if (!labels[indexPath.row].isOnCollection(savedLabels)) {
             addAction(labels[indexPath.row])
+        } else {
+            removeAction(labels[indexPath.row])
         }
+        
+        let feedbackGenerator = UISelectionFeedbackGenerator()
+        feedbackGenerator.selectionChanged()
     }
     
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        guard let savedLabels = savedLabels,
-            let labels = labels,
-            let removeAction = removeAction else { return }
-        
-        if (labels[indexPath.row].isOnCollection(savedLabels)) {
-            removeAction(labels[indexPath.row])
-        } 
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return FilterTableViewCell.height
     }
 }
