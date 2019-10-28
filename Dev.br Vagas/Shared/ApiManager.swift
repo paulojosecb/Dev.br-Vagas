@@ -65,7 +65,7 @@ class ApiManager: IssueGateway, UserImageGateway, LabelGateway {
 //    }
         
     func fetchUserImage(with url: String, completion: @escaping (ImageFetchResult<Data>) -> Void) {
-        Alamofire.request("\(base_url)issues").responseData { (data) in
+        Alamofire.request(url).responseData { (data) in
             
             guard let data = data.data else {
                 let error = CustomError(description: "Não foi possível dar fetch na imagem")
