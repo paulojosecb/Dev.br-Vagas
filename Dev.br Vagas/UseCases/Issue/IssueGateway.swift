@@ -9,5 +9,5 @@
 import UIKit
 
 protocol IssueGateway {
-    func fetchIssues(completion: @escaping (IssueUseCaseResult<[Issue]>) -> Void)
+    func fetchIssues(with filters: [Label]?, completion: @escaping (IssueUseCaseResult<[Issue]>) -> Void)
 }

@@ -19,13 +19,41 @@ class HomeViewController: UIViewController {
     var contentView: HomeView?
     
     var issueUseCase: IssueUseCase?
+    var selectedLabelsUseCase: LabelUseCase?
+    
     let mode: HomeMode
     
     var issues: [Issue] = [] {
         didSet {
             guard let contentView = contentView else { return }
+            self.contentView?.refreshControl.endRefreshing()
             contentView.tableView.reloadData()
         }
+    }
+    
+    var filteredIssues: [Issue] = [] {
+        didSet {
+            guard let contentView = contentView else { return }
+            contentView.tableView.reloadData()
+        }
+    }
+    
+    lazy var searchController: UISearchController = {
+        let controller = UISearchController(searchResultsController: nil)
+        controller.searchResultsUpdater = self
+        controller.obscuresBackgroundDuringPresentation = false
+        controller.searchBar.tintColor = .white
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+
+        return controller
+    }()
+    
+    var isSearchBarEmpty: Bool {
+      return searchController.searchBar.text?.isEmpty ?? true
+    }
+    
+    var isFiltering: Bool {
+      return searchController.isActive && !isSearchBarEmpty
     }
     
     init(mode: HomeMode) {
@@ -48,10 +76,32 @@ class HomeViewController: UIViewController {
         }
 
         self.contentView = HomeView(frame: self.view.bounds, parentVC: self)
+        self.contentView?.refreshControl.addTarget(self, action: #selector(fetchIsseus), for: .valueChanged)
         self.view = contentView
         
         issueUseCase = IssueUseCase(gateway: mode == .all ? ApiManager() : UserDefaultManager(), presenter: self)
-        issueUseCase?.fetchIssues()
+        selectedLabelsUseCase = LabelUseCase(gateway: UserDefaultManager())
+        
+        self.navigationItem.searchController = self.searchController
+        definesPresentationContext = true
+    }
+    
+    @objc func fetchIsseus() {
+        guard let issueUseCase = issueUseCase,
+            let selectedLabelsUseCase = selectedLabelsUseCase else { return }
+        
+        selectedLabelsUseCase.fetchLabels { (result) in
+            switch result {
+            case let .sucess(selectedLabels):
+                issueUseCase.fetchIssues(with: selectedLabels)
+            case .failure(_):
+                self.presentErrorAlert()
+            }
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        fetchIsseus()
     }
         
     func presentErrorAlert() {
@@ -72,8 +122,14 @@ class HomeViewController: UIViewController {
     }
     
     @objc func presentFilter() {
-        let vc = FilterViewController()
+        let vc = FilterViewController(onDismiss: fetchIsseus)
         self.navigationController?.present(vc, animated: true, completion: nil)
+    }
+    
+    func filterContentForSearchText(_ searchText: String) {
+        filteredIssues = issues.filter({ (i) -> Bool in
+            return i.title?.lowercased().contains(searchText.lowercased()) ?? false
+        })
     }
 
 }
@@ -96,15 +152,17 @@ extension HomeViewController: IssuePresenter {
 
 extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return issues.count
+        return isFiltering ? filteredIssues.count : issues.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: IssueCardTableViewCell.self)) as? IssueCardTableViewCell else { return UITableViewCell() }
         
-        cell.title = issues[indexPath.row].title
-        cell.state = issues[indexPath.row].state
-        cell.createdAt = issues[indexPath.row].created_at
+        let issue = isFiltering ? filteredIssues[indexPath.row] : issues[indexPath.row]
+        
+        cell.title = issue.title
+        cell.state = issue.state
+        cell.createdAt = issue.created_at
             
         cell.selectionStyle = .none
         
@@ -116,11 +174,18 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = DetailsViewControlller(issue: issues[indexPath.row])
+        let vc = DetailsViewControlller(issue: isFiltering ? filteredIssues[indexPath.row] : issues[indexPath.row])
         if (mode == .favorites) {
             vc.onSave = issueUseCase?.fetchIssues
         }
         self.navigationController?.present(vc, animated: true, completion: nil)
+    }
+}
+
+extension HomeViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        let searchBar = searchController.searchBar
+        filterContentForSearchText(searchBar.text ?? "")
     }
 }
 

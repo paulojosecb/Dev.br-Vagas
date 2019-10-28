@@ -14,7 +14,7 @@ class DetailsView: UIView {
     
     let issue: Issue
     
-    var onSave: (() -> Void)?
+    var onSave: (([Label]?) -> Void)?
     
     var favoriteUseCase: FavoriteUseCase?
     
@@ -203,7 +203,7 @@ class DetailsView: UIView {
                 return
             }
             
-            onSave()
+            onSave(nil)
         }
     }
     

@@ -12,6 +12,12 @@ class HomeView: UIView {
     
     weak var parentVC: HomeViewController?
     
+    lazy var refreshControl: UIRefreshControl = {
+        let control = UIRefreshControl()
+        control.tintColor = .white
+        return control
+    }()
+    
     lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -20,6 +26,11 @@ class HomeView: UIView {
         tableView.register(IssueCardTableViewCell.self, forCellReuseIdentifier: String(describing: IssueCardTableViewCell.self))
         tableView.separatorStyle = .none
         tableView.backgroundColor = .lightBackground
+        if #available(iOS 10.0, *) {
+            tableView.refreshControl = self.refreshControl
+        } else {
+          tableView.addSubview(refreshControl)
+        }
         return tableView
     }()
     

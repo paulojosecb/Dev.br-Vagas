@@ -14,7 +14,7 @@ class DetailsViewControlller: UIViewController {
     
     var userImageUseCase: UserImageUseCase?
     
-    var onSave: (() -> Void)?
+    var onSave: (([Label]?) -> Void)?
     
     var contentView: DetailsView?
     

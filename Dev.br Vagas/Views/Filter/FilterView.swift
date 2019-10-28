@@ -75,7 +75,7 @@ extension FilterView: UITableViewDelegate, UITableViewDataSource {
         
         cell.backgroundColor = .lightBackground
         cell.textLabel?.textColor = .white
-        cell.selectionStyle = .none
+//        cell.selectionStyle = .none
         cell.accessoryType = labels[indexPath.row].isOnCollection(savedLabels) ? .checkmark : .none
         return cell
     }

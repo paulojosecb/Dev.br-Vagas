@@ -22,8 +22,8 @@ class IssueUseCase {
         self.presenter = presenter
     }
     
-    func fetchIssues() {
-        gateway.fetchIssues(completion: presenter.presentResponse(result:))
+    func fetchIssues(with filters: [Label]? = nil) {
+        gateway.fetchIssues(with: filters, completion: presenter.presentResponse(result:))
     }
     
 }

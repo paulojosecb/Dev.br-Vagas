@@ -21,12 +21,19 @@ class ApiManager: IssueGateway, UserImageGateway, LabelGateway {
     
     let base_url = "https://api.github.com/repos/frontendbr/vagas/"
     
-    func fetchIssues(completion: @escaping (IssueUseCaseResult<[Issue]>) -> Void) {
-        Alamofire.request("\(base_url)issues").responseData { (data) in
+    func fetchIssues(with filters: [Label]? = nil, completion: @escaping (IssueUseCaseResult<[Issue]>) -> Void) {
+        let params = self.transformInParams(labels: filters)
+        print(params)
+        Alamofire.request("\(base_url)issues?labels=\(params)").responseData { (data) in
             do {
                 guard let data = data.data else { return }
-                let issues = try JSONDecoder().decode([Issue].self, from: data)
-                completion(.sucess(issues))
+                if (data.isEmpty) {
+                    completion(.sucess([Issue]()))
+                } else {
+                    let issues = try JSONDecoder().decode([Issue].self, from: data)
+                    completion(.sucess(issues))
+                }
+                
             } catch let error {
                 completion(.failure(error))
             }
@@ -68,6 +75,23 @@ class ApiManager: IssueGateway, UserImageGateway, LabelGateway {
             
             completion(.sucess(data))
         }
+    }
+    
+    func transformInParams(labels: [Label]?) -> String {
+        guard let labels = labels else { return ""}
+        
+        var param = ""
+        
+        for (index, label) in labels.enumerated() {
+            guard let name = label.name else { break }
+            param.append("\(name)")
+            
+            if (index < labels.count - 1) {
+                param.append(",")
+            }
+        }
+        
+        return param
     }
     
     

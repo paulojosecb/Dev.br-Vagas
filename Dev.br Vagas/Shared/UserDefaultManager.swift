@@ -51,7 +51,7 @@ class UserDefaultManager: FavoriteGateway, IssueGateway, LabelGateway {
         }
     }
     
-    func fetchIssues(completion: @escaping (IssueUseCaseResult<[Issue]>) -> Void) {
+    func fetchIssues(with filters: [Label]? = nil, completion: @escaping (IssueUseCaseResult<[Issue]>) -> Void) {
         do {
             let issues = try getIssues()
             completion(.sucess(issues))
