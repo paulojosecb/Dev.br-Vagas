@@ -22,6 +22,10 @@
 		2BA59256236739DD00825AFB /* Nunito-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2BA59252236739DC00825AFB /* Nunito-SemiBold.ttf */; };
 		2BA59257236739DD00825AFB /* Nunito-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2BA59253236739DD00825AFB /* Nunito-Bold.ttf */; };
 		2BA5925923673B1100825AFB /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA5925823673B1100825AFB /* UIFont.swift */; };
+		2BA5925B2367508C00825AFB /* UIBezierPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA5925A2367508C00825AFB /* UIBezierPath.swift */; };
+		2BA5925D2367509F00825AFB /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA5925C2367509F00825AFB /* Int.swift */; };
+		2BA5925F2367514900825AFB /* HearthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA5925E2367514900825AFB /* HearthButton.swift */; };
+		2BA592612367562800825AFB /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA592602367562800825AFB /* Tag.swift */; };
 		2BB44AD3235E15F500DDA0DE /* UserImageGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB44ABB235E15F500DDA0DE /* UserImageGateway.swift */; };
 		2BB44AD4235E15F500DDA0DE /* UserImageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB44ABC235E15F500DDA0DE /* UserImageUseCase.swift */; };
 		2BB44AD5235E15F500DDA0DE /* UserImagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB44ABD235E15F500DDA0DE /* UserImagePresenter.swift */; };
@@ -76,6 +80,10 @@
 		2BA59252236739DC00825AFB /* Nunito-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-SemiBold.ttf"; sourceTree = "<group>"; };
 		2BA59253236739DD00825AFB /* Nunito-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Bold.ttf"; sourceTree = "<group>"; };
 		2BA5925823673B1100825AFB /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
+		2BA5925A2367508C00825AFB /* UIBezierPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBezierPath.swift; sourceTree = "<group>"; };
+		2BA5925C2367509F00825AFB /* Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
+		2BA5925E2367514900825AFB /* HearthButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HearthButton.swift; sourceTree = "<group>"; };
+		2BA592602367562800825AFB /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		2BB44ABB235E15F500DDA0DE /* UserImageGateway.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserImageGateway.swift; sourceTree = "<group>"; };
 		2BB44ABC235E15F500DDA0DE /* UserImageUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserImageUseCase.swift; sourceTree = "<group>"; };
 		2BB44ABD235E15F500DDA0DE /* UserImagePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserImagePresenter.swift; sourceTree = "<group>"; };
@@ -146,6 +154,8 @@
 			children = (
 				2B0F7B84235E57FD00D6C119 /* UIColor.swift */,
 				2BA5925823673B1100825AFB /* UIFont.swift */,
+				2BA5925A2367508C00825AFB /* UIBezierPath.swift */,
+				2BA5925C2367509F00825AFB /* Int.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -258,6 +268,8 @@
 				2BB44ACC235E15F500DDA0DE /* CardView.swift */,
 				2BB44ACD235E15F500DDA0DE /* IssueCardTableViewCell.swift */,
 				2B0F7B81235E571200D6C119 /* Button.swift */,
+				2BA5925E2367514900825AFB /* HearthButton.swift */,
+				2BA592602367562800825AFB /* Tag.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -518,6 +530,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2BA5925F2367514900825AFB /* HearthButton.swift in Sources */,
 				2BB44AD8235E15F500DDA0DE /* IssueUseCase.swift in Sources */,
 				2B0F7B7E235E3F4700D6C119 /* FavoriteUseCase.swift in Sources */,
 				2BB44AE8235E160200DDA0DE /* Issue.swift in Sources */,
@@ -541,6 +554,8 @@
 				2BB44ADD235E15F500DDA0DE /* ApiManager.swift in Sources */,
 				2BDAE2F8235E157B002DBE84 /* AppDelegate.swift in Sources */,
 				2BB44ADF235E15F500DDA0DE /* IssueCardTableViewCell.swift in Sources */,
+				2BA592612367562800825AFB /* Tag.swift in Sources */,
+				2BA5925D2367509F00825AFB /* Int.swift in Sources */,
 				2BA5924E2363211800825AFB /* FilterViewController.swift in Sources */,
 				2B0F7B78235E3E6E00D6C119 /* UserDefaultManager.swift in Sources */,
 				2BED14D3235FA35F00A9BF35 /* Label.swift in Sources */,
@@ -548,6 +563,7 @@
 				2BA592472363139000825AFB /* LabelGateway.swift in Sources */,
 				2BA5925923673B1100825AFB /* UIFont.swift in Sources */,
 				2BDAE2FA235E157B002DBE84 /* SceneDelegate.swift in Sources */,
+				2BA5925B2367508C00825AFB /* UIBezierPath.swift in Sources */,
 				2BA5924C2363210C00825AFB /* FilterView.swift in Sources */,
 				2BB44AE7235E160200DDA0DE /* User.swift in Sources */,
 			);
