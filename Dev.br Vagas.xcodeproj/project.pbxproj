@@ -17,6 +17,10 @@
 		2BA592472363139000825AFB /* LabelGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA592462363139000825AFB /* LabelGateway.swift */; };
 		2BA5924C2363210C00825AFB /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA5924B2363210C00825AFB /* FilterView.swift */; };
 		2BA5924E2363211800825AFB /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA5924D2363211800825AFB /* FilterViewController.swift */; };
+		2BA59254236739DD00825AFB /* Nunito-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2BA59250236739DC00825AFB /* Nunito-ExtraBold.ttf */; };
+		2BA59255236739DD00825AFB /* Nunito-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2BA59251236739DC00825AFB /* Nunito-Regular.ttf */; };
+		2BA59256236739DD00825AFB /* Nunito-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2BA59252236739DC00825AFB /* Nunito-SemiBold.ttf */; };
+		2BA59257236739DD00825AFB /* Nunito-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2BA59253236739DD00825AFB /* Nunito-Bold.ttf */; };
 		2BB44AD3235E15F500DDA0DE /* UserImageGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB44ABB235E15F500DDA0DE /* UserImageGateway.swift */; };
 		2BB44AD4235E15F500DDA0DE /* UserImageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB44ABC235E15F500DDA0DE /* UserImageUseCase.swift */; };
 		2BB44AD5235E15F500DDA0DE /* UserImagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB44ABD235E15F500DDA0DE /* UserImagePresenter.swift */; };
@@ -66,6 +70,10 @@
 		2BA592462363139000825AFB /* LabelGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelGateway.swift; sourceTree = "<group>"; };
 		2BA5924B2363210C00825AFB /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
 		2BA5924D2363211800825AFB /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
+		2BA59250236739DC00825AFB /* Nunito-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-ExtraBold.ttf"; sourceTree = "<group>"; };
+		2BA59251236739DC00825AFB /* Nunito-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Regular.ttf"; sourceTree = "<group>"; };
+		2BA59252236739DC00825AFB /* Nunito-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-SemiBold.ttf"; sourceTree = "<group>"; };
+		2BA59253236739DD00825AFB /* Nunito-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Bold.ttf"; sourceTree = "<group>"; };
 		2BB44ABB235E15F500DDA0DE /* UserImageGateway.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserImageGateway.swift; sourceTree = "<group>"; };
 		2BB44ABC235E15F500DDA0DE /* UserImageUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserImageUseCase.swift; sourceTree = "<group>"; };
 		2BB44ABD235E15F500DDA0DE /* UserImagePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserImagePresenter.swift; sourceTree = "<group>"; };
@@ -157,6 +165,17 @@
 			path = Filter;
 			sourceTree = "<group>";
 		};
+		2BA5924F236739B500825AFB /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				2BA59253236739DD00825AFB /* Nunito-Bold.ttf */,
+				2BA59250236739DC00825AFB /* Nunito-ExtraBold.ttf */,
+				2BA59251236739DC00825AFB /* Nunito-Regular.ttf */,
+				2BA59252236739DC00825AFB /* Nunito-SemiBold.ttf */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		2BB44AB9235E15F500DDA0DE /* UseCases */ = {
 			isa = PBXGroup;
 			children = (
@@ -219,6 +238,7 @@
 		2BB44AC9235E15F500DDA0DE /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				2BA5924F236739B500825AFB /* Resources */,
 				2B0F7B83235E57F000D6C119 /* Extensions */,
 				2B0F7B77235E3E6E00D6C119 /* UserDefaultManager.swift */,
 				2BB44ACA235E15F500DDA0DE /* ApiManager.swift */,
@@ -408,8 +428,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2BA59254236739DD00825AFB /* Nunito-ExtraBold.ttf in Resources */,
 				2BDAE304235E157D002DBE84 /* LaunchScreen.storyboard in Resources */,
+				2BA59255236739DD00825AFB /* Nunito-Regular.ttf in Resources */,
 				2BDAE301235E157D002DBE84 /* Assets.xcassets in Resources */,
+				2BA59257236739DD00825AFB /* Nunito-Bold.ttf in Resources */,
+				2BA59256236739DD00825AFB /* Nunito-SemiBold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
