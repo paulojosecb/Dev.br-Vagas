@@ -33,7 +33,7 @@ class Button: UIView {
     lazy var label: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .preferredFont(forTextStyle: .callout)
+        label.font = .action
         label.text = self.title
         label.textAlignment = .center
         return label
@@ -93,13 +93,13 @@ class Button: UIView {
             switch type {
             case .ghost:
                 self.backgroundView.backgroundColor = .none
-                self.backgroundView.layer.borderColor = UIColor.white.cgColor
+                self.backgroundView.layer.borderColor = UIColor.azul70.cgColor
                 self.backgroundView.layer.borderWidth = 1
                 
-                self.label.textColor = .white
+                self.label.textColor = .azul70
             case .normal:
-                self.backgroundView.backgroundColor = .background
-                self.backgroundView.layer.borderColor = UIColor.background.cgColor
+                self.backgroundView.backgroundColor = .azul
+                self.backgroundView.layer.borderColor = UIColor.azul.cgColor
                 self.label.textColor = .white
             case .destructive:
                 self.label.textColor = .white
