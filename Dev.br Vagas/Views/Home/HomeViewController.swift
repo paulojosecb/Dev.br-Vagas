@@ -56,9 +56,10 @@ class HomeViewController: UIViewController {
         let controller = UISearchController(searchResultsController: nil)
         controller.searchResultsUpdater = self
         controller.obscuresBackgroundDuringPresentation = false
-        controller.searchBar.tintColor = .white
-        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-
+        controller.searchBar.tintColor = .black50
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black50]
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = [NSAttributedString.Key.font: UIFont.body]
+        
         return controller
     }()
     
@@ -125,6 +126,14 @@ class HomeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         fetchIsseus()
     }
+    
+    func reloadData() {
+        if (mode == .favorites) {
+            issueUseCase?.fetchIssues()
+        } else {
+            contentView?.tableView.reloadData()
+        }
+    }
         
     func presentErrorAlert() {
         let alertController = UIAlertController(title: "Ocorreu um erro",
@@ -153,7 +162,7 @@ class HomeViewController: UIViewController {
             return i.title?.lowercased().contains(searchText.lowercased()) ?? false
         })
     }
-
+    
 }
 
 extension HomeViewController: IssuePresenter {
@@ -184,8 +193,8 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
         
         let issue = isFiltering ? filteredIssues[indexPath.row] : issues[indexPath.row]
         
+        cell.issue = issue
         cell.title = issue.title
-        
         var tags: [String] = []
         
         for label in (issue.labels) ?? [Label]() {
@@ -194,6 +203,7 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
         
         cell.tags = tags
         cell.selectionStyle = .none
+        
         
         return cell
     }
@@ -204,9 +214,7 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = DetailsViewControlller(issue: isFiltering ? filteredIssues[indexPath.row] : issues[indexPath.row])
-        if (mode == .favorites) {
-            vc.onSave = issueUseCase?.fetchIssues
-        }
+        vc.onSave = self.reloadData
         self.navigationController?.present(vc, animated: true, completion: nil)
     }
 }

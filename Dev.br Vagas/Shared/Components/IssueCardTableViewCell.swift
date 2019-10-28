@@ -12,6 +12,21 @@ class IssueCardTableViewCell: UITableViewCell {
     
     static var height: CGFloat = 114
     
+    var favoriteUseCase: FavoriteUseCase?
+    
+    var issue: Issue? {
+        didSet {
+            favoriteUseCase?.isSaved(issue: issue!, completion: { (result) in
+                switch result {
+                case let .saved(isSaved):
+                    self.hearthButton.filled = isSaved
+                default:
+                    self.hearthButton.filled = false
+                }
+            })
+        }
+    }
+    
     var title: String? {
         didSet {
             let range = title?.range(of: "]")
@@ -75,6 +90,8 @@ class IssueCardTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.backgroundColor = .background
         setupView()
+        
+        favoriteUseCase = FavoriteUseCase(gateway: UserDefaultManager())
     }
     
     required init?(coder: NSCoder) {
@@ -82,7 +99,17 @@ class IssueCardTableViewCell: UITableViewCell {
     }
     
     @objc func handleFavoriteGesture(_ sender: UITapGestureRecognizer? = nil) {
-        self.hearthButton.filled = !self.hearthButton.filled
+        guard let issue = issue else { return }
+        favoriteUseCase?.toggleFavorite(issue: issue, completion: { (result) in
+            switch result {
+            case .failure(_):
+                print("Error")
+            default:
+                self.hearthButton.filled = !self.hearthButton.filled
+                let feedbackGenerator = UISelectionFeedbackGenerator()
+                feedbackGenerator.selectionChanged()
+            }
+        })
     }
     
     func calculateLabelHeightFor(label: UILabel, and width: CGFloat) -> CGFloat {

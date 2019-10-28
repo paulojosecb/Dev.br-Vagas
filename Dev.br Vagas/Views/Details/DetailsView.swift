@@ -14,7 +14,7 @@ class DetailsView: UIView {
     
     let issue: Issue
     
-    var onSave: (([Label]?) -> Void)?
+    var onSave: (() -> Void)?
     
     var favoriteUseCase: FavoriteUseCase?
     
@@ -99,20 +99,20 @@ class DetailsView: UIView {
         return label
     }()
     
-    lazy var saveButton: Button = {
-        let button = Button(frame: .zero, type: .normal, title: "Action", action: handleSaveButton)
+    lazy var saveButton: HeathButton = {
+        let button = HeathButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         
         self.favoriteUseCase?.isSaved(issue: self.issue, completion: { (result) in
             switch result {
             case let .saved(s):
-                button.setTitle(s ? "Remover" : "Salvar")
-                button.setType(s ? .destructive : .normal)
+                button.filled = s
             default:
-                button.setTitle("Salvar")
+                print()
             }
         })
         
+        button.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleSaveButton)))
         return button
     }()
     
@@ -203,11 +203,13 @@ class DetailsView: UIView {
         useCase.toggleFavorite(issue: self.issue) { (result) in
             switch result {
             case .added:
-                saveButton.setTitle("Remover")
-                saveButton.setType(.destructive)
+                saveButton.filled = !saveButton.filled
+                let feedbackGenerator = UISelectionFeedbackGenerator()
+                feedbackGenerator.selectionChanged()
             case .removed:
-                saveButton.setTitle("Salvar")
-                saveButton.setType(.normal)
+                saveButton.filled = !saveButton.filled
+                let feedbackGenerator = UISelectionFeedbackGenerator()
+                feedbackGenerator.selectionChanged()
             default:
                 print()
             }
@@ -215,8 +217,8 @@ class DetailsView: UIView {
             guard let onSave = onSave else {
                 return
             }
-            
-            onSave(nil)
+        
+            onSave()
         }
     }
     
@@ -291,13 +293,13 @@ extension DetailsView: CodeView {
         
         openButton.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 32).isActive = true
         openButton.leftAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leftAnchor).isActive = true
-        openButton.widthAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.45).isActive = true
+        openButton.widthAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.70).isActive = true
         openButton.heightAnchor.constraint(equalToConstant: Button.height).isActive = true
         
         saveButton.topAnchor.constraint(equalTo: openButton.topAnchor).isActive = true
-        saveButton.rightAnchor.constraint(equalTo: contentView.layoutMarginsGuide.rightAnchor).isActive = true
-        saveButton.widthAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.45).isActive = true
-        saveButton.heightAnchor.constraint(equalToConstant: Button.height).isActive = true
+        saveButton.rightAnchor.constraint(equalTo: contentView.layoutMarginsGuide.rightAnchor, constant: -12).isActive = true
+        saveButton.widthAnchor.constraint(equalToConstant: 32).isActive = true
+        saveButton.heightAnchor.constraint(equalToConstant: 32).isActive = true
         
         bodyView.topAnchor.constraint(equalTo: openButton.bottomAnchor, constant: 32).isActive = true
         bodyView.leftAnchor.constraint(equalTo: titleLabel.leftAnchor).isActive = true
