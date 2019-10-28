@@ -10,6 +10,7 @@ target 'Dev.br Vagas' do
   pod 'Alamofire'
   pod 'Down'
   pod 'SwiftyMarkdown'
+  pod 'NVActivityIndicatorView'
 
   target 'Dev.br VagasTests' do
     inherit! :search_paths

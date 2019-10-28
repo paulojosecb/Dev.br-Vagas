@@ -16,6 +16,18 @@ enum HomeMode {
 
 class HomeViewController: UIViewController {
     
+    var isLoading: Bool = false {
+        didSet {
+            contentView?.isLoading = isLoading
+        }
+    }
+    
+    var isEmpty: Bool = false {
+        didSet {
+            contentView?.isEmpty = isEmpty
+        }
+    }
+    
     var contentView: HomeView?
     
     var issueUseCase: IssueUseCase?
@@ -28,6 +40,8 @@ class HomeViewController: UIViewController {
             guard let contentView = contentView else { return }
             self.contentView?.refreshControl.endRefreshing()
             contentView.tableView.reloadData()
+            
+            isEmpty = issues.count == 0 ? true : false
         }
     }
     
@@ -93,6 +107,8 @@ class HomeViewController: UIViewController {
     }
     
     @objc func fetchIsseus() {
+        self.isLoading = true
+        
         guard let issueUseCase = issueUseCase,
             let selectedLabelsUseCase = selectedLabelsUseCase else { return }
         
@@ -150,8 +166,10 @@ extension HomeViewController: IssuePresenter {
         switch result {
         case let .sucess(issues):
             self.issues = issues
+            self.isLoading = false
         case .failure(_):
             presentErrorAlert()
+            self.isLoading = false
         }
     }
 }

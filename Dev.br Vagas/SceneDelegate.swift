@@ -40,8 +40,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             navigationController.navigationBar.standardAppearance = navBarAppearance
             navigationController.navigationBar.scrollEdgeAppearance = navBarAppearance
         } else {
-            navigationController.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
-            navigationController.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
+            navigationController.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor(white: 0, alpha: 0.85)]
+            navigationController.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor(white: 0, alpha: 0.85)]
             navigationController.navigationBar.titleTextAttributes = [.font: UIFont.title2]
             navigationController.navigationBar.largeTitleTextAttributes = [.font: UIFont.title1]
             navigationController.navigationBar.isTranslucent = false
