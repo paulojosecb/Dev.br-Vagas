@@ -29,7 +29,7 @@ class FilterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.contentView = FilterView(frame: .zero)
+        self.contentView = FilterView(frame: .zero, handleClose: self.handleClose)
         self.contentView?.addAction = self.add
         self.contentView?.removeAction = self.remove
         
@@ -150,6 +150,10 @@ class FilterViewController: UIViewController {
                 self.present(alert, animated: true, completion: nil)
             }
         })
+    }
+    
+    func handleClose() {
+        self.dismiss(animated: true, completion: nil)
     }
 
 }
