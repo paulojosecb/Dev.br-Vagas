@@ -23,27 +23,12 @@ class IssueCardTableViewCell: UITableViewCell {
         }
     }
     
-//    var state: String? {
-//        didSet {
-//            stateLabel.text = state == "open" ? "Aberta" : "Fechada"
-//            stateLabel.backgroundColor = state == "open" ? .systemGreen : .systemRed
-//            stateLabel.textColor = .white
-//        }
-//    }
-    
-//    var createdAt: String? {
-//        didSet {
-//            let formatter = DateFormatter()
-//            formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-//            formatter.locale = Locale(identifier: "pt-BR")
-//            let date = formatter.date(from: createdAt!) ?? Date()
-//            let ptFormatter = DateFormatter()
-//            ptFormatter.dateFormat = "dd/MM/yyyy"
-//            let dateString = ptFormatter.string(from: date)
-//            createdAtLabel.text = dateString
-//        }
-//    }
-
+    var tags: [String]? {
+        didSet {
+            cloudTag.tags = tags
+        }
+    }
+        
     lazy var cardView: CardView = {
         let view = CardView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -69,12 +54,12 @@ class IssueCardTableViewCell: UITableViewCell {
         return label
     }()
     
-    lazy var tagView: Tag = {
-        let tag = Tag(frame: .zero, name: "PJ")
-        tag.translatesAutoresizingMaskIntoConstraints = false
-        return tag
+    lazy var cloudTag: CloudTag = {
+        let view = CloudTag(frame: .zero, tags: nil)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
-        
+            
     lazy var hearthButton: HeathButton = {
         let view = HeathButton()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -116,7 +101,7 @@ extension IssueCardTableViewCell: CodeView {
         contentView.addSubview(cardView)
         contentView.addSubview(titleLabel)
         contentView.addSubview(localLabel)
-        contentView.addSubview(tagView)
+        contentView.addSubview(cloudTag)
         contentView.addSubview(hearthButton)
     }
     
@@ -136,13 +121,15 @@ extension IssueCardTableViewCell: CodeView {
         localLabel.widthAnchor.constraint(equalTo: cardView.widthAnchor, multiplier: 0.75).isActive = true
         localLabel.heightAnchor.constraint(equalToConstant: localLabel.intrinsicContentSize.height).isActive = true
         
-        tagView.topAnchor.constraint(equalTo: localLabel.bottomAnchor, constant: 9).isActive = true
-        tagView.leftAnchor.constraint(equalTo: titleLabel.leftAnchor).isActive = true
-        
+        cloudTag.topAnchor.constraint(equalTo: localLabel.bottomAnchor, constant: 9).isActive = true
+        cloudTag.leftAnchor.constraint(equalTo: titleLabel.leftAnchor).isActive = true
+        cloudTag.heightAnchor.constraint(equalToConstant: 19).isActive = true
+        cloudTag.rightAnchor.constraint(equalTo: hearthButton.leftAnchor, constant: -8).isActive = true
+    
         hearthButton.widthAnchor.constraint(equalToConstant: 24).isActive = true
         hearthButton.heightAnchor.constraint(equalToConstant: 24).isActive = true
         hearthButton.rightAnchor.constraint(equalTo: cardView.layoutMarginsGuide.rightAnchor, constant: -4).isActive = true
-        hearthButton.centerYAnchor.constraint(equalTo: tagView.centerYAnchor).isActive = true
+        hearthButton.centerYAnchor.constraint(equalTo: cloudTag.centerYAnchor).isActive = true
     }
 
     func setupAdditionalConfiguration() {

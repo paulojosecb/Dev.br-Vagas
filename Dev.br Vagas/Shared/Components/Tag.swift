@@ -12,6 +12,14 @@ class Tag: UIView {
     
     let name: String
     
+    var necessaryWidthToRender: CGFloat {
+        get {
+            return label.intrinsicContentSize.width + 4
+        }
+    }
+    
+    static var height: CGFloat = 20
+    
     lazy var label: UILabel = {
         let label = UILabel()
         label.text = self.name
@@ -42,7 +50,7 @@ extension Tag: CodeView {
     
     func setupConstraints() {
         self.widthAnchor.constraint(equalToConstant: label.intrinsicContentSize.width + 4).isActive = true
-        self.heightAnchor.constraint(equalToConstant: label.intrinsicContentSize.height + 2).isActive = true
+        self.heightAnchor.constraint(equalToConstant: Tag.height).isActive = true
         
         label.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
         label.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true

@@ -167,9 +167,14 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
         let issue = isFiltering ? filteredIssues[indexPath.row] : issues[indexPath.row]
         
         cell.title = issue.title
-//        cell.state = issue.state
-//        cell.createdAt = issue.created_at
-            
+        
+        var tags: [String] = []
+        
+        for label in (issue.labels) ?? [Label]() {
+            tags.append(label.name ?? "")
+        }
+        
+        cell.tags = tags
         cell.selectionStyle = .none
         
         return cell
