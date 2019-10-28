@@ -21,12 +21,19 @@ class DetailsView: UIView {
     var bodyViewHeight: CGFloat = 0
     var bodyViewWidth: CGFloat = 0
     
+    lazy var backgroundView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .azul
+        return view
+    }()
+    
     lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .preferredFont(forTextStyle: .title1)
+        label.font = .title1
         label.text = "Título da issue"
-        label.numberOfLines = 3
+        label.numberOfLines = 2
         label.textColor = .white
         return label
     }()
@@ -34,24 +41,30 @@ class DetailsView: UIView {
     lazy var localLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .preferredFont(forTextStyle: .headline)
+        label.font = .headline
         label.text = "em Rio de Janeiro/Remoto"
         label.textColor = .white
         return label
     }()
     
-    lazy var stateLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: 18, weight: .bold)
-        label.backgroundColor = issue.state == "open" ? .systemGreen : .systemRed
-        label.textColor = .white
-        label.textAlignment = .center
-        label.layer.masksToBounds = true
-        label.layer.cornerRadius = 2
-        return label
+    lazy var cloudTag: CloudTag = {
+        var tags: [String] = []
+        
+        guard let labels = self.issue.labels else {
+            let cloudTag = CloudTag(frame: .zero, tags: [])
+            cloudTag.translatesAutoresizingMaskIntoConstraints = false
+            return cloudTag
+        }
+        
+        for label in labels {
+            tags.append(label.name ?? "")
+        }
+
+        let cloudTag = CloudTag(frame: .zero, tags: tags)
+        cloudTag.translatesAutoresizingMaskIntoConstraints = false
+        return cloudTag
     }()
-    
+        
     lazy var avatarImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -61,18 +74,18 @@ class DetailsView: UIView {
     lazy var createdLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .preferredFont(forTextStyle: .footnote)
+        label.font = .noteHeadline
         label.text = "Criado em \(issue.created_at ?? "")"
-        label.textColor = .white
+        label.textColor = .black50
         return label
     }()
     
     lazy var byLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .preferredFont(forTextStyle: .footnote)
+        label.font = .noteSubheadline
         label.text = "Por em eumesmo"
-        label.textColor = .white
+        label.textColor = .black50
         return label
     }()
     
@@ -81,7 +94,8 @@ class DetailsView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         label.sizeToFit()
-        label.textColor = .white
+        label.font = .body
+        label.textColor = .black50
         return label
     }()
     
@@ -139,7 +153,6 @@ class DetailsView: UIView {
         
         titleLabel.text = titleString ?? ""
         localLabel.text = "em \(localString ?? "")"
-        stateLabel.text = issue.state == "open" ? "Aberta" : "Fechada"
         byLabel.text = "por \(issue.user?.login ?? "")"
         
         let formatter = DateFormatter()
@@ -151,7 +164,7 @@ class DetailsView: UIView {
         let dateString = ptFormatter.string(from: date)
         createdLabel.text = "Postad em \(dateString)"
         
-        bodyView.attributedText = try! Down(markdownString: issue.body ?? "").toAttributedString(.default, stylesheet: "* {font-family: -apple-system; font-size: 1.2rem; color: white } code, pre { font-family: Menlo }")
+        bodyView.attributedText = try! Down(markdownString: issue.body ?? "").toAttributedString(.default, stylesheet: "* {font-family: Nunito-Regular; font-size: 1.2rem; color: rgba(0,0,0,0.8) } code, pre { font-family: Menlo }")
         
         bodyViewHeight = bodyView.intrinsicContentSize.height
                 
@@ -167,7 +180,7 @@ class DetailsView: UIView {
     
     func calculateContentSize() -> CGFloat {
         let contentSize = (16 + calculateLabelHeightFor(label: titleLabel, and: UIScreen.main.bounds.width) +
-            16 + bodyViewHeight + 300 + 16 + stateLabel.intrinsicContentSize.height + 16 + 50)
+            16 + bodyViewHeight + 300  + 16 + 50)
         return contentSize
     }
     
@@ -212,10 +225,13 @@ class DetailsView: UIView {
 extension DetailsView: CodeView {
     func buildViewHierarchy() {
         
-        contentView.addSubview(titleLabel)
-        contentView.addSubview(localLabel)
+        
+        backgroundView.addSubview(titleLabel)
+        backgroundView.addSubview(localLabel)
+        addSubview(backgroundView)
+
+        contentView.addSubview(cloudTag)
         contentView.addSubview(bodyView)
-        contentView.addSubview(stateLabel)
         contentView.addSubview(avatarImageView)
         contentView.addSubview(createdLabel)
         contentView.addSubview(byLabel)
@@ -227,7 +243,22 @@ extension DetailsView: CodeView {
     }
     
     func setupConstraints() {
-        scrollView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        backgroundView.topAnchor.constraint(equalTo: self.topAnchor, constant: -8).isActive = true
+        backgroundView.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
+        backgroundView.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
+        backgroundView.heightAnchor.constraint(equalToConstant: 180).isActive = true
+        
+        titleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 8).isActive = true
+        titleLabel.leftAnchor.constraint(equalTo: self.layoutMarginsGuide.leftAnchor, constant: 0).isActive = true
+        titleLabel.rightAnchor.constraint(equalTo: self.layoutMarginsGuide.rightAnchor, constant: 0).isActive = true
+        titleLabel.heightAnchor.constraint(equalToConstant: calculateLabelHeightFor(label: titleLabel, and: UIScreen.main.bounds.width)).isActive = true
+        
+        localLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8).isActive = true
+        localLabel.leftAnchor.constraint(equalTo: titleLabel.leftAnchor).isActive = true
+        localLabel.heightAnchor.constraint(equalToConstant: localLabel.intrinsicContentSize.height).isActive = true
+        localLabel.rightAnchor.constraint(equalTo: titleLabel.rightAnchor).isActive = true
+        
+        scrollView.topAnchor.constraint(equalTo: backgroundView.bottomAnchor).isActive = true
         scrollView.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
         scrollView.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
         scrollView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
@@ -238,22 +269,12 @@ extension DetailsView: CodeView {
         contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
         contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
         
-        titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16).isActive = true
-        titleLabel.leftAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leftAnchor, constant: 8).isActive = true
-        titleLabel.rightAnchor.constraint(equalTo: contentView.layoutMarginsGuide.rightAnchor, constant: -8).isActive = true
-        titleLabel.heightAnchor.constraint(equalToConstant: calculateLabelHeightFor(label: titleLabel, and: UIScreen.main.bounds.width) + 30).isActive = true
+        cloudTag.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 32).isActive = true
+        cloudTag.leftAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leftAnchor, constant: 8).isActive = true
+        cloudTag.rightAnchor.constraint(equalTo: contentView.layoutMarginsGuide.rightAnchor, constant: 8).isActive = true
+        cloudTag.heightAnchor.constraint(equalToConstant: Tag.height).isActive = true
         
-        localLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 4).isActive = true
-        localLabel.leftAnchor.constraint(equalTo: titleLabel.leftAnchor).isActive = true
-        localLabel.heightAnchor.constraint(equalToConstant: localLabel.intrinsicContentSize.height).isActive = true
-        localLabel.rightAnchor.constraint(equalTo: titleLabel.rightAnchor).isActive = true
-        
-        stateLabel.centerYAnchor.constraint(equalTo: avatarImageView.centerYAnchor).isActive = true
-        stateLabel.rightAnchor.constraint(equalTo: contentView.layoutMarginsGuide.rightAnchor).isActive = true
-        stateLabel.heightAnchor.constraint(equalToConstant: stateLabel.intrinsicContentSize.height).isActive = true
-        stateLabel.widthAnchor.constraint(equalToConstant: stateLabel.intrinsicContentSize.width + 16).isActive = true
-       
-        avatarImageView.topAnchor.constraint(equalTo: localLabel.bottomAnchor, constant: 24).isActive = true
+        avatarImageView.topAnchor.constraint(equalTo: cloudTag.bottomAnchor, constant: 24).isActive = true
         avatarImageView.leftAnchor.constraint(equalTo: titleLabel.leftAnchor).isActive = true
         avatarImageView.widthAnchor.constraint(equalToConstant: 50).isActive = true
         avatarImageView.heightAnchor.constraint(equalToConstant: 50).isActive = true

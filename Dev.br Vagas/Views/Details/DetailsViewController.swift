@@ -47,8 +47,8 @@ extension DetailsViewControlller: UserImagePresenter {
     func presentUserImage(result: ImageFetchResult<Data>) {
         switch result {
         case let .sucess(data):
-            guard let image = UIImage(data: data), let contentView = contentView else { return }
-            contentView.avatarImageView.image = image
+            guard let image = UIImage(data: data) else { return }
+            contentView?.avatarImageView.image = image
         case .failure(_):
             print()
         }
