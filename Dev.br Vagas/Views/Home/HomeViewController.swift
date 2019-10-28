@@ -71,8 +71,14 @@ class HomeViewController: UIViewController {
         self.title = mode == .all ? "Todas vagas" : "Favoritas"
                 
         if (mode == .all) {
-            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Favoritos", style: .plain, target: self, action: #selector(presentFavorites))
-            self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Filtros", style: .plain, target: self, action: #selector(presentFilter))
+            let rightBarButton = UIBarButtonItem(title: "Favoritos", style: .plain, target: self, action: #selector(presentFavorites))
+            rightBarButton.setTitleTextAttributes([.font: UIFont.action], for: UIControl.State.normal)
+            
+            let leftBarButton = UIBarButtonItem(title: "Filtros", style: .plain, target: self, action: #selector(presentFilter))
+            leftBarButton.setTitleTextAttributes([ .font: UIFont.action], for: UIControl.State.normal)
+
+            self.navigationItem.rightBarButtonItem = rightBarButton
+            self.navigationItem.leftBarButtonItem = leftBarButton
         }
 
         self.contentView = HomeView(frame: self.view.bounds, parentVC: self)
@@ -161,8 +167,8 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
         let issue = isFiltering ? filteredIssues[indexPath.row] : issues[indexPath.row]
         
         cell.title = issue.title
-        cell.state = issue.state
-        cell.createdAt = issue.created_at
+//        cell.state = issue.state
+//        cell.createdAt = issue.created_at
             
         cell.selectionStyle = .none
         

@@ -128,7 +128,7 @@ class DetailsView: UIView {
     init(frame: CGRect, issue: Issue) {
         self.issue = issue
         super.init(frame: frame)
-        self.backgroundColor = .lightBackground
+        self.backgroundColor = .background
         self.favoriteUseCase = FavoriteUseCase(gateway: UserDefaultManager())
         
         let title = issue.title

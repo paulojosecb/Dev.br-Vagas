@@ -25,14 +25,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let navigationController = UINavigationController(rootViewController: HomeViewController(mode: .all))
         
         navigationController.navigationBar.prefersLargeTitles = true
-        navigationController.navigationBar.tintColor = .white
+        navigationController.navigationBar.tintColor = .azul
         
         if #available(iOS 13.0, *) {
             let navBarAppearance = UINavigationBarAppearance()
             navBarAppearance.configureWithOpaqueBackground()
-            navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor(white: 1, alpha: 0.9)]
-            navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor(white: 1, alpha: 0.9)]
-            navBarAppearance.backgroundColor = .lightBackground
+            navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor(white: 0, alpha: 0.85)]
+            navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor(white: 0, alpha: 0.85)]
+            navBarAppearance.titleTextAttributes = [.font: UIFont.title2]
+            navBarAppearance.largeTitleTextAttributes = [.font: UIFont.title1]
+            navBarAppearance.backgroundColor = .background
             navBarAppearance.shadowColor = .none
             navBarAppearance.shadowImage = UIImage()
             navigationController.navigationBar.standardAppearance = navBarAppearance
@@ -40,10 +42,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         } else {
             navigationController.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
             navigationController.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
+            navigationController.navigationBar.titleTextAttributes = [.font: UIFont.title2]
+            navigationController.navigationBar.largeTitleTextAttributes = [.font: UIFont.title1]
             navigationController.navigationBar.isTranslucent = false
             navigationController.navigationBar.shadowImage = UIImage()
-            navigationController.navigationBar.barTintColor = .lightBackground
-            navigationController.navigationBar.backgroundColor = .lightBackground
+            navigationController.navigationBar.barTintColor = .background
+            navigationController.navigationBar.backgroundColor = .background
         }
     
             

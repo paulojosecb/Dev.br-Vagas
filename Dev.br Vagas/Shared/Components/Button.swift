@@ -70,8 +70,8 @@ class Button: UIView {
             shadowLayer.masksToBounds = false
             
             shadowLayer.path = UIBezierPath(roundedRect: self.bounds, cornerRadius: 5).cgPath
-            shadowLayer.fillColor = UIColor.darkBackground.cgColor
-            shadowLayer.shadowColor = UIColor.darkBackground.cgColor
+            shadowLayer.fillColor = UIColor.background.cgColor
+            shadowLayer.shadowColor = UIColor.background.cgColor
             shadowLayer.shadowPath = shadowLayer.path
             shadowLayer.shadowOffset = CGSize(width: 0.0, height: 5.0)
             shadowLayer.shadowOpacity = 0.5
@@ -98,8 +98,8 @@ class Button: UIView {
                 
                 self.label.textColor = .white
             case .normal:
-                self.backgroundView.backgroundColor = .darkBackground
-                self.backgroundView.layer.borderColor = UIColor.darkBackground.cgColor
+                self.backgroundView.backgroundColor = .background
+                self.backgroundView.layer.borderColor = UIColor.background.cgColor
                 self.label.textColor = .white
             case .destructive:
                 self.label.textColor = .white

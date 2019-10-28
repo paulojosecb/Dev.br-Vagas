@@ -25,7 +25,7 @@ class HomeView: UIView {
         tableView.dataSource = self.parentVC
         tableView.register(IssueCardTableViewCell.self, forCellReuseIdentifier: String(describing: IssueCardTableViewCell.self))
         tableView.separatorStyle = .none
-        tableView.backgroundColor = .lightBackground
+        tableView.backgroundColor = .background
         if #available(iOS 10.0, *) {
             tableView.refreshControl = self.refreshControl
         } else {
