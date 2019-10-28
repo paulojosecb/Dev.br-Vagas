@@ -16,7 +16,7 @@ class HeathButton: UIButton {
         }
     }
     
-    var strokeColor: UIColor = UIColor.azul
+    var strokeColor: UIColor = UIColor.azul70
     
     override func draw(_ rect: CGRect) {
        drawShape()
@@ -28,7 +28,7 @@ class HeathButton: UIButton {
             
             let layer = CAShapeLayer()
             layer.path = UIBezierPath(heartIn: self.bounds).cgPath
-            layer.strokeColor = UIColor.azul.cgColor
+            layer.strokeColor = UIColor.azul70.cgColor
             
             layer.fillColor = self.filled ? UIColor.azul.cgColor : nil
             self.layer.addSublayer(layer)

@@ -168,8 +168,8 @@ class DetailsView: UIView {
         
         bodyViewHeight = bodyView.intrinsicContentSize.height
                 
-        self.bodyView.heightAnchor.constraint(equalToConstant: bodyViewHeight).isActive = true
-        self.contentView.heightAnchor.constraint(equalToConstant: self.calculateContentSize()).isActive = true
+        self.bodyView.heightAnchor.constraint(equalToConstant: bodyViewHeight + 400).isActive = true
+        self.contentView.heightAnchor.constraint(equalToConstant: self.calculateContentSize() + 400).isActive = true
         
         setupView()
     }
@@ -302,7 +302,6 @@ extension DetailsView: CodeView {
         bodyView.topAnchor.constraint(equalTo: openButton.bottomAnchor, constant: 32).isActive = true
         bodyView.leftAnchor.constraint(equalTo: titleLabel.leftAnchor).isActive = true
         bodyView.rightAnchor.constraint(equalTo: titleLabel.rightAnchor).isActive = true
-//        bodyView?.heightAnchor.constraint(equalToConstant: 500).isActive = true
     }
     
     func setupAdditionalConfiguration() {
