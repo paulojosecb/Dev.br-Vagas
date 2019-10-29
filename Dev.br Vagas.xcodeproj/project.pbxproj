@@ -14,6 +14,9 @@
 		2B0F7B82235E571200D6C119 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0F7B81235E571200D6C119 /* Button.swift */; };
 		2B0F7B85235E57FD00D6C119 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0F7B84235E57FD00D6C119 /* UIColor.swift */; };
 		2B85FC672368B62B00478BCE /* UINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B85FC662368B62B00478BCE /* UINavigationController.swift */; };
+		2B85FC6A2368B99700478BCE /* TransitionCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B85FC692368B99700478BCE /* TransitionCoordinator.swift */; };
+		2B85FC6C2368C6A900478BCE /* ToLeftCustomTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B85FC6B2368C6A900478BCE /* ToLeftCustomTransition.swift */; };
+		2B85FC6E2368C6E200478BCE /* ToRightCustomTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B85FC6D2368C6E200478BCE /* ToRightCustomTransition.swift */; };
 		2BA592452363138400825AFB /* LabelUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA592442363138400825AFB /* LabelUseCase.swift */; };
 		2BA592472363139000825AFB /* LabelGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA592462363139000825AFB /* LabelGateway.swift */; };
 		2BA5924C2363210C00825AFB /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA5924B2363210C00825AFB /* FilterView.swift */; };
@@ -76,6 +79,9 @@
 		2B0F7B81235E571200D6C119 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		2B0F7B84235E57FD00D6C119 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		2B85FC662368B62B00478BCE /* UINavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationController.swift; sourceTree = "<group>"; };
+		2B85FC692368B99700478BCE /* TransitionCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionCoordinator.swift; sourceTree = "<group>"; };
+		2B85FC6B2368C6A900478BCE /* ToLeftCustomTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToLeftCustomTransition.swift; sourceTree = "<group>"; };
+		2B85FC6D2368C6E200478BCE /* ToRightCustomTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToRightCustomTransition.swift; sourceTree = "<group>"; };
 		2BA592442363138400825AFB /* LabelUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelUseCase.swift; sourceTree = "<group>"; };
 		2BA592462363139000825AFB /* LabelGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelGateway.swift; sourceTree = "<group>"; };
 		2BA5924B2363210C00825AFB /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
@@ -169,6 +175,16 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		2B85FC682368B6B400478BCE /* Transitions */ = {
+			isa = PBXGroup;
+			children = (
+				2B85FC692368B99700478BCE /* TransitionCoordinator.swift */,
+				2B85FC6B2368C6A900478BCE /* ToLeftCustomTransition.swift */,
+				2B85FC6D2368C6E200478BCE /* ToRightCustomTransition.swift */,
+			);
+			path = Transitions;
+			sourceTree = "<group>";
+		};
 		2BA592432363137500825AFB /* Label */ = {
 			isa = PBXGroup;
 			children = (
@@ -260,6 +276,7 @@
 		2BB44AC9235E15F500DDA0DE /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				2B85FC682368B6B400478BCE /* Transitions */,
 				2BA5924F236739B500825AFB /* Resources */,
 				2B0F7B83235E57F000D6C119 /* Extensions */,
 				2B0F7B77235E3E6E00D6C119 /* UserDefaultManager.swift */,
@@ -545,6 +562,7 @@
 				2BA5925F2367514900825AFB /* HearthButton.swift in Sources */,
 				2B85FC672368B62B00478BCE /* UINavigationController.swift in Sources */,
 				2BB44AD8235E15F500DDA0DE /* IssueUseCase.swift in Sources */,
+				2B85FC6A2368B99700478BCE /* TransitionCoordinator.swift in Sources */,
 				2B0F7B7E235E3F4700D6C119 /* FavoriteUseCase.swift in Sources */,
 				2BB44AE8235E160200DDA0DE /* Issue.swift in Sources */,
 				2BB44AE3235E15F500DDA0DE /* AvatarImageView.swift in Sources */,
@@ -559,6 +577,7 @@
 				2B0F7B85235E57FD00D6C119 /* UIColor.swift in Sources */,
 				2BB44ADE235E15F500DDA0DE /* CardView.swift in Sources */,
 				2BB44AD4235E15F500DDA0DE /* UserImageUseCase.swift in Sources */,
+				2B85FC6E2368C6E200478BCE /* ToRightCustomTransition.swift in Sources */,
 				2BB0C2F42367B515003A1E1A /* CustomTabBar.swift in Sources */,
 				2BB44ADB235E15F500DDA0DE /* DetailsView.swift in Sources */,
 				2BB44AD3235E15F500DDA0DE /* UserImageGateway.swift in Sources */,
@@ -578,6 +597,7 @@
 				2BB44ADC235E15F500DDA0DE /* DetailsViewController.swift in Sources */,
 				2BA592472363139000825AFB /* LabelGateway.swift in Sources */,
 				2BA5925923673B1100825AFB /* UIFont.swift in Sources */,
+				2B85FC6C2368C6A900478BCE /* ToLeftCustomTransition.swift in Sources */,
 				2BDAE2FA235E157B002DBE84 /* SceneDelegate.swift in Sources */,
 				2BA5925B2367508C00825AFB /* UIBezierPath.swift in Sources */,
 				2BA5924C2363210C00825AFB /* FilterView.swift in Sources */,

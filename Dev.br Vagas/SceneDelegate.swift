@@ -24,6 +24,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let navigationController = UINavigationController(rootViewController: HomeViewController(mode: .all))
         
+        navigationController.delegate = TransitionCoordinator.shared
         navigationController.navigationBar.prefersLargeTitles = true
         navigationController.navigationBar.tintColor = .azul
         navigationController.navigationBar.barStyle = .default

@@ -74,6 +74,7 @@ class HomeViewController: UIViewController {
     init(mode: HomeMode) {
         self.mode = mode
         super.init(nibName: nil, bundle: nil)
+        self.transitioningDelegate = self
     }
         
     required init?(coder: NSCoder) {
@@ -144,14 +145,18 @@ class HomeViewController: UIViewController {
     func presentAll() {
         if (mode == .favorites) {
             let vc = HomeViewController(mode: .all)
-            self.navigationController?.pushViewController(vc, animated: true)
+            vc.modalPresentationStyle = .fullScreen
+//            present(vc, animated: true, completion: nil)
+            self.navigationController?.setViewControllers([vc], animated: true)
         }
     }
     
     func presentFavorites() {
         if (mode == .all) {
             let vc = HomeViewController(mode: .favorites)
-            self.navigationController?.pushViewController(vc, animated: true)
+            vc.modalPresentationStyle = .fullScreen
+//            present(vc, animated: true, completion: nil)
+            self.navigationController?.setViewControllers([vc], animated: true)
         }
     }
     
@@ -188,14 +193,16 @@ extension HomeViewController: IssuePresenter {
 
 extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return isFiltering ? filteredIssues.count + 1 : issues.count + 1
+        return isFiltering ? filteredIssues.count + 2 : issues.count + 2
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: IssueCardTableViewCell.self)) as? IssueCardTableViewCell else { return UITableViewCell() }
         
         if (indexPath.row >= (isFiltering ? filteredIssues.count : issues.count)) {
-            return UITableViewCell()
+            let cell = UITableViewCell()
+            cell.backgroundColor = .background
+            return cell
         }
         
         let issue = isFiltering ? filteredIssues[indexPath.row] : issues[indexPath.row]
@@ -230,6 +237,15 @@ extension HomeViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         let searchBar = searchController.searchBar
         filterContentForSearchText(searchBar.text ?? "")
+    }
+}
+
+extension HomeViewController: UIViewControllerTransitioningDelegate {
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return nil
+    }
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return nil
     }
 }
 
