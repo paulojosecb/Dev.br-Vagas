@@ -26,6 +26,10 @@ extension UIColor {
         return UIColor(white: 0.0, alpha: 0.4)
     }
     
+    @nonobjc class var alwaysBlack: UIColor {
+        return UIColor(named: "AlwaysBlack") ?? UIColor(white: 0, alpha: 1)
+    }
+    
     @nonobjc class var azul70: UIColor {
         return UIColor(red: 40.0 / 255.0, green: 87.0 / 255.0, blue: 229.0 / 255.0, alpha: 0.7)
     }

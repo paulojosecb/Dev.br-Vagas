@@ -13,6 +13,7 @@
 		2B0F7B80235E3F6B00D6C119 /* FavoriteGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0F7B7F235E3F6B00D6C119 /* FavoriteGateway.swift */; };
 		2B0F7B82235E571200D6C119 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0F7B81235E571200D6C119 /* Button.swift */; };
 		2B0F7B85235E57FD00D6C119 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0F7B84235E57FD00D6C119 /* UIColor.swift */; };
+		2B85FC672368B62B00478BCE /* UINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B85FC662368B62B00478BCE /* UINavigationController.swift */; };
 		2BA592452363138400825AFB /* LabelUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA592442363138400825AFB /* LabelUseCase.swift */; };
 		2BA592472363139000825AFB /* LabelGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA592462363139000825AFB /* LabelGateway.swift */; };
 		2BA5924C2363210C00825AFB /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA5924B2363210C00825AFB /* FilterView.swift */; };
@@ -74,6 +75,7 @@
 		2B0F7B7F235E3F6B00D6C119 /* FavoriteGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteGateway.swift; sourceTree = "<group>"; };
 		2B0F7B81235E571200D6C119 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		2B0F7B84235E57FD00D6C119 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		2B85FC662368B62B00478BCE /* UINavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationController.swift; sourceTree = "<group>"; };
 		2BA592442363138400825AFB /* LabelUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelUseCase.swift; sourceTree = "<group>"; };
 		2BA592462363139000825AFB /* LabelGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelGateway.swift; sourceTree = "<group>"; };
 		2BA5924B2363210C00825AFB /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 				2BA5925823673B1100825AFB /* UIFont.swift */,
 				2BA5925A2367508C00825AFB /* UIBezierPath.swift */,
 				2BA5925C2367509F00825AFB /* Int.swift */,
+				2B85FC662368B62B00478BCE /* UINavigationController.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -540,6 +543,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2BA5925F2367514900825AFB /* HearthButton.swift in Sources */,
+				2B85FC672368B62B00478BCE /* UINavigationController.swift in Sources */,
 				2BB44AD8235E15F500DDA0DE /* IssueUseCase.swift in Sources */,
 				2B0F7B7E235E3F4700D6C119 /* FavoriteUseCase.swift in Sources */,
 				2BB44AE8235E160200DDA0DE /* Issue.swift in Sources */,

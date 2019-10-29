@@ -26,24 +26,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         navigationController.navigationBar.prefersLargeTitles = true
         navigationController.navigationBar.tintColor = .azul
+        navigationController.navigationBar.barStyle = .default
         
         if #available(iOS 13.0, *) {
             let navBarAppearance = UINavigationBarAppearance()
             navBarAppearance.configureWithOpaqueBackground()
-            navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor(white: 0, alpha: 0.85)]
-            navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor(white: 0, alpha: 0.85)]
-            navBarAppearance.titleTextAttributes = [.font: UIFont.title2]
-            navBarAppearance.largeTitleTextAttributes = [.font: UIFont.title1]
+            navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.alwaysBlack, .font: UIFont.title2]
+            navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.alwaysBlack, .font: UIFont.title1]
             navBarAppearance.backgroundColor = .background
             navBarAppearance.shadowColor = .none
             navBarAppearance.shadowImage = UIImage()
-            navigationController.navigationBar.standardAppearance = navBarAppearance
-            navigationController.navigationBar.scrollEdgeAppearance = navBarAppearance
+            UINavigationBar.appearance().standardAppearance = navBarAppearance
+            UINavigationBar.appearance().scrollEdgeAppearance = navBarAppearance
         } else {
-            navigationController.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor(white: 0, alpha: 0.85)]
-            navigationController.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor(white: 0, alpha: 0.85)]
-            navigationController.navigationBar.titleTextAttributes = [.font: UIFont.title2]
-            navigationController.navigationBar.largeTitleTextAttributes = [.font: UIFont.title1]
+            navigationController.navigationBar.titleTextAttributes = [.font: UIFont.title2, .foregroundColor: UIColor(white: 0, alpha: 0.85)]
+            navigationController.navigationBar.largeTitleTextAttributes = [.font: UIFont.title1, .foregroundColor: UIColor(white: 0, alpha: 0.85)]
             navigationController.navigationBar.isTranslucent = false
             navigationController.navigationBar.shadowImage = UIImage()
             navigationController.navigationBar.barTintColor = .background
