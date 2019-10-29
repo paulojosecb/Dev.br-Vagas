@@ -27,6 +27,7 @@
 		2BA5925F2367514900825AFB /* HearthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA5925E2367514900825AFB /* HearthButton.swift */; };
 		2BA592612367562800825AFB /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA592602367562800825AFB /* Tag.swift */; };
 		2BA592632367593E00825AFB /* CloudTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA592622367593E00825AFB /* CloudTag.swift */; };
+		2BB0C2F42367B515003A1E1A /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB0C2F32367B515003A1E1A /* CustomTabBar.swift */; };
 		2BB44AD3235E15F500DDA0DE /* UserImageGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB44ABB235E15F500DDA0DE /* UserImageGateway.swift */; };
 		2BB44AD4235E15F500DDA0DE /* UserImageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB44ABC235E15F500DDA0DE /* UserImageUseCase.swift */; };
 		2BB44AD5235E15F500DDA0DE /* UserImagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB44ABD235E15F500DDA0DE /* UserImagePresenter.swift */; };
@@ -87,6 +88,7 @@
 		2BA5925E2367514900825AFB /* HearthButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HearthButton.swift; sourceTree = "<group>"; };
 		2BA592602367562800825AFB /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		2BA592622367593E00825AFB /* CloudTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudTag.swift; sourceTree = "<group>"; };
+		2BB0C2F32367B515003A1E1A /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
 		2BB44ABB235E15F500DDA0DE /* UserImageGateway.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserImageGateway.swift; sourceTree = "<group>"; };
 		2BB44ABC235E15F500DDA0DE /* UserImageUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserImageUseCase.swift; sourceTree = "<group>"; };
 		2BB44ABD235E15F500DDA0DE /* UserImagePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserImagePresenter.swift; sourceTree = "<group>"; };
@@ -276,6 +278,7 @@
 				2BA592602367562800825AFB /* Tag.swift */,
 				2BA592622367593E00825AFB /* CloudTag.swift */,
 				2BF373D12367843D00D279F4 /* FIlterTableViewCell.swift */,
+				2BB0C2F32367B515003A1E1A /* CustomTabBar.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -552,6 +555,7 @@
 				2B0F7B85235E57FD00D6C119 /* UIColor.swift in Sources */,
 				2BB44ADE235E15F500DDA0DE /* CardView.swift in Sources */,
 				2BB44AD4235E15F500DDA0DE /* UserImageUseCase.swift in Sources */,
+				2BB0C2F42367B515003A1E1A /* CustomTabBar.swift in Sources */,
 				2BB44ADB235E15F500DDA0DE /* DetailsView.swift in Sources */,
 				2BB44AD3235E15F500DDA0DE /* UserImageGateway.swift in Sources */,
 				2BB44AD6235E15F500DDA0DE /* IssueGateway.swift in Sources */,

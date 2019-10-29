@@ -84,19 +84,13 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         
         self.title = mode == .all ? "Todas vagas" : "Favoritas"
-                
-        if (mode == .all) {
-            let rightBarButton = UIBarButtonItem(title: "Favoritos", style: .plain, target: self, action: #selector(presentFavorites))
-            rightBarButton.setTitleTextAttributes([.font: UIFont.action], for: UIControl.State.normal)
-            
-            let leftBarButton = UIBarButtonItem(title: "Filtros", style: .plain, target: self, action: #selector(presentFilter))
-            leftBarButton.setTitleTextAttributes([ .font: UIFont.action], for: UIControl.State.normal)
-
-            self.navigationItem.rightBarButtonItem = rightBarButton
-            self.navigationItem.leftBarButtonItem = leftBarButton
-        }
 
         self.contentView = HomeView(frame: self.view.bounds, parentVC: self)
+                        
+        self.contentView?.tabBar.action1 = presentAll
+        self.contentView?.tabBar.action2 = presentFavorites
+        self.contentView?.onFilter = presentFilter
+        
         self.contentView?.refreshControl.addTarget(self, action: #selector(fetchIsseus), for: .valueChanged)
         self.view = contentView
         
@@ -147,12 +141,21 @@ class HomeViewController: UIViewController {
         present(alertController, animated: true, completion: nil)
     }
     
-    @objc func presentFavorites() {
-        let vc = HomeViewController(mode: .favorites)
-        self.navigationController?.pushViewController(vc, animated: true)
+    func presentAll() {
+        if (mode == .favorites) {
+            let vc = HomeViewController(mode: .all)
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
     
-    @objc func presentFilter() {
+    func presentFavorites() {
+        if (mode == .all) {
+            let vc = HomeViewController(mode: .favorites)
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
+    func presentFilter() {
         let vc = FilterViewController(onDismiss: fetchIsseus)
         self.navigationController?.present(vc, animated: true, completion: nil)
     }
@@ -185,11 +188,15 @@ extension HomeViewController: IssuePresenter {
 
 extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return isFiltering ? filteredIssues.count : issues.count
+        return isFiltering ? filteredIssues.count + 1 : issues.count + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: IssueCardTableViewCell.self)) as? IssueCardTableViewCell else { return UITableViewCell() }
+        
+        if (indexPath.row >= (isFiltering ? filteredIssues.count : issues.count)) {
+            return UITableViewCell()
+        }
         
         let issue = isFiltering ? filteredIssues[indexPath.row] : issues[indexPath.row]
         

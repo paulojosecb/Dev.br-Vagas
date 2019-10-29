@@ -168,8 +168,9 @@ class DetailsView: UIView {
         
         bodyViewHeight = bodyView.intrinsicContentSize.height
                 
-        self.bodyView.heightAnchor.constraint(equalToConstant: bodyViewHeight + 400).isActive = true
-        self.contentView.heightAnchor.constraint(equalToConstant: self.calculateContentSize() + 400).isActive = true
+//        self.bodyView.heightAnchor.constraint(equalToConstant: bodyViewHeight + 400).isActive = true
+        self.bodyView.sizeToFit()
+        self.contentView.heightAnchor.constraint(equalToConstant: self.calculateContentSize() * 1.6).isActive = true
         
         setupView()
     }
@@ -180,7 +181,7 @@ class DetailsView: UIView {
     
     func calculateContentSize() -> CGFloat {
         let contentSize = (16 + calculateLabelHeightFor(label: titleLabel, and: UIScreen.main.bounds.width) +
-            16 + bodyViewHeight + 300  + 16 + 50)
+            16 + bodyView.frame.height + 300  + 16 + 50)
         return contentSize
     }
     

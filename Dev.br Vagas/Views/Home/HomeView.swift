@@ -13,6 +13,8 @@ class HomeView: UIView {
     
     weak var parentVC: HomeViewController?
     
+    var onFilter: (() -> Void)?
+    
     var isLoading: Bool = false {
         didSet {
             tableView.isHidden = isLoading ? true : false
@@ -85,6 +87,33 @@ class HomeView: UIView {
         return tableView
     }()
     
+    lazy var tabBar: CustomTabBar = {
+        let view = CustomTabBar(frame: .zero, activeItem: parentVC?.mode == .all ? .left : .right)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    lazy var filterButton: UIView = {
+        let view = UIView()
+        
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "filter") ?? UIImage()
+        imageView.contentMode = .scaleAspectFill
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.addSubview(imageView)
+        imageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        imageView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 2).isActive = true
+        imageView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.4).isActive = true
+        imageView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.4).isActive = true
+        
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .azul
+        
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleFilter(_:))))
+        return view
+    }()
+    
     init(frame: CGRect, parentVC: HomeViewController) {
         super.init(frame: frame)
         self.parentVC = parentVC
@@ -95,7 +124,15 @@ class HomeView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
+    override func draw(_ rect: CGRect) {
+        filterButton.layer.masksToBounds = true
+        filterButton.layer.cornerRadius = filterButton.frame.width / 2
+    }
+    
+    @objc func handleFilter(_ sender: UITapGestureRecognizer? = nil) {
+        self.onFilter?()
+    }
 }
 
 extension HomeView: CodeView {
@@ -104,6 +141,8 @@ extension HomeView: CodeView {
         addSubview(activityIndicator)
         addSubview(emptyLabel)
         addSubview(emptyImage)
+        addSubview(tabBar)
+        addSubview(filterButton)
     }
     
     func setupConstraints() {
@@ -126,10 +165,20 @@ extension HomeView: CodeView {
         activityIndicator.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
         activityIndicator.heightAnchor.constraint(equalToConstant: 48).isActive = true
         activityIndicator.widthAnchor.constraint(equalToConstant: 48).isActive = true
+        
+        tabBar.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        tabBar.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.9).isActive = true
+        tabBar.heightAnchor.constraint(equalToConstant: CustomTabBar.height).isActive = true
+        tabBar.bottomAnchor.constraint(equalTo: self.layoutMarginsGuide.bottomAnchor, constant: -8).isActive = true
+        
+        filterButton.bottomAnchor.constraint(equalTo: tabBar.topAnchor, constant: -16).isActive = true
+        filterButton.rightAnchor.constraint(equalTo: self.layoutMarginsGuide.rightAnchor).isActive = true
+        filterButton.widthAnchor.constraint(equalToConstant: 64).isActive = true
+        filterButton.heightAnchor.constraint(equalToConstant: 64).isActive = true
     }
     
     func setupAdditionalConfiguration() {
-        
+
     }
     
 }
