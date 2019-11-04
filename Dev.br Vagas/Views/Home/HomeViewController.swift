@@ -193,11 +193,13 @@ extension HomeViewController: IssuePresenter {
 
 extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return isFiltering ? filteredIssues.count + 2 : issues.count + 2
+        return isFiltering ? filteredIssues.count : issues.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: IssueCardTableViewCell.self)) as? IssueCardTableViewCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? IssueCardTableViewCell else {
+            return UITableViewCell()
+        }
         
         if (indexPath.row >= (isFiltering ? filteredIssues.count : issues.count)) {
             let cell = UITableViewCell()

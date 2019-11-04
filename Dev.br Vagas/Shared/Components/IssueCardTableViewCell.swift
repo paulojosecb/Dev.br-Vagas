@@ -153,7 +153,7 @@ extension IssueCardTableViewCell: CodeView {
         cloudTag.heightAnchor.constraint(equalToConstant: 19).isActive = true
         cloudTag.rightAnchor.constraint(equalTo: hearthButton.leftAnchor, constant: -8).isActive = true
     
-        hearthButton.widthAnchor.constraint(equalToConstant: 24).isActive = true
+        hearthButton.widthAnchor.constraint(equalToConstant: 26).isActive = true
         hearthButton.heightAnchor.constraint(equalToConstant: 24).isActive = true
         hearthButton.rightAnchor.constraint(equalTo: cardView.layoutMarginsGuide.rightAnchor, constant: -4).isActive = true
         hearthButton.centerYAnchor.constraint(equalTo: cloudTag.centerYAnchor).isActive = true

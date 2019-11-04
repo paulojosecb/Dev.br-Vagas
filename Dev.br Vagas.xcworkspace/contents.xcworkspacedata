@@ -4,6 +4,228 @@
    <FileRef
       location = "group:Dev.br Vagas.xcodeproj">
    </FileRef>
+   <Group
+      location = "group:Dev.br Vagas"
+      name = "Dev.br Vagas">
+      <FileRef
+         location = "group:Dev.br Vagas/AppDelegate.swift">
+      </FileRef>
+      <FileRef
+         location = "group:Dev.br Vagas/SceneDelegate.swift">
+      </FileRef>
+      <Group
+         location = "group:Dev.br Vagas/Shared"
+         name = "Shared">
+         <Group
+            location = "group:Dev.br Vagas/Shared/Transitions"
+            name = "Transitions">
+            <FileRef
+               location = "group:Dev.br Vagas/Shared/Transitions/TransitionCoordinator.swift">
+            </FileRef>
+            <FileRef
+               location = "group:Dev.br Vagas/Shared/Transitions/ToLeftCustomTransition.swift">
+            </FileRef>
+            <FileRef
+               location = "group:Dev.br Vagas/Shared/Transitions/ToRightCustomTransition.swift">
+            </FileRef>
+         </Group>
+         <Group
+            location = "group:Dev.br Vagas/Shared/Resources"
+            name = "Resources">
+            <FileRef
+               location = "group:Dev.br Vagas/Shared/Resources/Nunito-Bold.ttf">
+            </FileRef>
+            <FileRef
+               location = "group:Dev.br Vagas/Shared/Resources/Nunito-ExtraBold.ttf">
+            </FileRef>
+            <FileRef
+               location = "group:Dev.br Vagas/Shared/Resources/Nunito-Regular.ttf">
+            </FileRef>
+            <FileRef
+               location = "group:Dev.br Vagas/Shared/Resources/Nunito-SemiBold.ttf">
+            </FileRef>
+         </Group>
+         <Group
+            location = "group:Dev.br Vagas/Shared/Extensions"
+            name = "Extensions">
+            <FileRef
+               location = "group:Dev.br Vagas/Shared/Extensions/UIColor.swift">
+            </FileRef>
+            <FileRef
+               location = "group:Dev.br Vagas/Shared/Extensions/UIFont.swift">
+            </FileRef>
+            <FileRef
+               location = "group:Dev.br Vagas/Shared/Extensions/UIBezierPath.swift">
+            </FileRef>
+            <FileRef
+               location = "group:Dev.br Vagas/Shared/Extensions/Int.swift">
+            </FileRef>
+            <FileRef
+               location = "group:Dev.br Vagas/Shared/Extensions/UINavigationController.swift">
+            </FileRef>
+         </Group>
+         <FileRef
+            location = "group:Dev.br Vagas/Shared/UserDefaultManager.swift">
+         </FileRef>
+         <FileRef
+            location = "group:Dev.br Vagas/Shared/ApiManager.swift">
+         </FileRef>
+         <Group
+            location = "group:Dev.br Vagas/Shared/Components"
+            name = "Components">
+            <FileRef
+               location = "group:Dev.br Vagas/Shared/Components/CardView.swift">
+            </FileRef>
+            <FileRef
+               location = "group:Dev.br Vagas/Shared/Components/IssueCardTableViewCell.swift">
+            </FileRef>
+            <FileRef
+               location = "group:Dev.br Vagas/Shared/Components/Button.swift">
+            </FileRef>
+            <FileRef
+               location = "group:Dev.br Vagas/Shared/Components/HearthButton.swift">
+            </FileRef>
+            <FileRef
+               location = "group:Dev.br Vagas/Shared/Components/Tag.swift">
+            </FileRef>
+            <FileRef
+               location = "group:Dev.br Vagas/Shared/Components/CloudTag.swift">
+            </FileRef>
+            <FileRef
+               location = "group:Dev.br Vagas/Shared/Components/FIlterTableViewCell.swift">
+            </FileRef>
+            <FileRef
+               location = "group:Dev.br Vagas/Shared/Components/CustomTabBar.swift">
+            </FileRef>
+         </Group>
+         <FileRef
+            location = "group:Dev.br Vagas/Shared/CustomError.swift">
+         </FileRef>
+         <Group
+            location = "group:Dev.br Vagas/Shared/Protocols"
+            name = "Protocols">
+            <FileRef
+               location = "group:Dev.br Vagas/Shared/Protocols/CustomView.swift">
+            </FileRef>
+            <FileRef
+               location = "group:Dev.br Vagas/Shared/Protocols/CodeView.swift">
+            </FileRef>
+            <FileRef
+               location = "group:Dev.br Vagas/Shared/Protocols/AvatarImageView.swift">
+            </FileRef>
+         </Group>
+      </Group>
+      <Group
+         location = "group:Dev.br Vagas/UseCases"
+         name = "UseCases">
+         <Group
+            location = "group:Dev.br Vagas/UseCases/Label"
+            name = "Label">
+            <FileRef
+               location = "group:Dev.br Vagas/UseCases/Label/LabelUseCase.swift">
+            </FileRef>
+            <FileRef
+               location = "group:Dev.br Vagas/UseCases/Label/LabelGateway.swift">
+            </FileRef>
+         </Group>
+         <Group
+            location = "group:Dev.br Vagas/UseCases/Favorite"
+            name = "Favorite">
+            <FileRef
+               location = "group:Dev.br Vagas/UseCases/Favorite/FavoriteUseCase.swift">
+            </FileRef>
+            <FileRef
+               location = "group:Dev.br Vagas/UseCases/Favorite/FavoriteGateway.swift">
+            </FileRef>
+         </Group>
+         <Group
+            location = "group:Dev.br Vagas/UseCases/UserImage"
+            name = "UserImage">
+            <FileRef
+               location = "group:Dev.br Vagas/UseCases/UserImage/UserImageGateway.swift">
+            </FileRef>
+            <FileRef
+               location = "group:Dev.br Vagas/UseCases/UserImage/UserImageUseCase.swift">
+            </FileRef>
+            <FileRef
+               location = "group:Dev.br Vagas/UseCases/UserImage/UserImagePresenter.swift">
+            </FileRef>
+         </Group>
+         <Group
+            location = "group:Dev.br Vagas/UseCases/Issue"
+            name = "Issue">
+            <FileRef
+               location = "group:Dev.br Vagas/UseCases/Issue/IssueGateway.swift">
+            </FileRef>
+            <FileRef
+               location = "group:Dev.br Vagas/UseCases/Issue/IssuePresenter.swift">
+            </FileRef>
+            <FileRef
+               location = "group:Dev.br Vagas/UseCases/Issue/IssueUseCase.swift">
+            </FileRef>
+         </Group>
+      </Group>
+      <Group
+         location = "group:Dev.br Vagas/Views"
+         name = "Views">
+         <Group
+            location = "group:Dev.br Vagas/Views/Filter"
+            name = "Filter">
+            <FileRef
+               location = "group:Dev.br Vagas/Views/Filter/FilterView.swift">
+            </FileRef>
+            <FileRef
+               location = "group:Dev.br Vagas/Views/Filter/FilterViewController.swift">
+            </FileRef>
+         </Group>
+         <Group
+            location = "group:Dev.br Vagas/Views/Home"
+            name = "Home">
+            <FileRef
+               location = "group:Dev.br Vagas/Views/Home/HomeView.swift">
+            </FileRef>
+            <FileRef
+               location = "group:Dev.br Vagas/Views/Home/HomeViewController.swift">
+            </FileRef>
+         </Group>
+         <Group
+            location = "group:Dev.br Vagas/Views/Details"
+            name = "Details">
+            <FileRef
+               location = "group:Dev.br Vagas/Views/Details/DetailsView.swift">
+            </FileRef>
+            <FileRef
+               location = "group:Dev.br Vagas/Views/Details/DetailsViewController.swift">
+            </FileRef>
+         </Group>
+      </Group>
+      <Group
+         location = "group:Dev.br Vagas/Models"
+         name = "Models">
+         <FileRef
+            location = "group:Dev.br Vagas/Models/User.swift">
+         </FileRef>
+         <FileRef
+            location = "group:Dev.br Vagas/Models/Issue.swift">
+         </FileRef>
+         <FileRef
+            location = "group:Dev.br Vagas/Models/Label.swift">
+         </FileRef>
+      </Group>
+      <FileRef
+         location = "group:Dev.br Vagas/Assets.xcassets">
+      </FileRef>
+      <Group
+         location = "group:Dev.br Vagas"
+         name = "LaunchScreen.storyboard">
+         <FileRef
+            location = "group:Dev.br Vagas/Base.lproj/LaunchScreen.storyboard">
+         </FileRef>
+      </Group>
+      <FileRef
+         location = "group:Dev.br Vagas/Info.plist">
+      </FileRef>
+   </Group>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">
    </FileRef>

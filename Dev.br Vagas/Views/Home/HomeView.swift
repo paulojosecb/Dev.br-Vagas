@@ -76,7 +76,7 @@ class HomeView: UIView {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.delegate = self.parentVC
         tableView.dataSource = self.parentVC
-        tableView.register(IssueCardTableViewCell.self, forCellReuseIdentifier: String(describing: IssueCardTableViewCell.self))
+        tableView.register(IssueCardTableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.separatorStyle = .none
         tableView.backgroundColor = .background
         if #available(iOS 10.0, *) {
